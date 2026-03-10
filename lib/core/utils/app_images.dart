@@ -17,5 +17,9 @@ class Assets {
   /// Assets for imagesOnboardingImageTwo
   /// assets/images/onboarding_image_two.svg
   static const String imagesOnboardingImageTwo = "assets/images/onboarding_image_two.svg";
+
+  /// Assets for imagesUserImage
+  /// assets/images/user_image.jpeg
+  static const String imagesUserImage = "assets/images/user_image.jpeg";
 }
 
