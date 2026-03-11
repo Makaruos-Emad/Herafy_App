@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/theme/app_colors.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:herafy/core/utils/app_images.dart';
 
 class AppBarActions extends StatelessWidget {
   const AppBarActions({
@@ -17,18 +17,18 @@ class AppBarActions extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onLocationPressed,
-          icon: PhosphorIcon(
-            PhosphorIcons.mapPin(),
-            color: AppColors.primaryColor,
-            size: 28,
+          icon: SvgPicture.asset(
+            Assets.imagesMapPinIcon,
+            width: 28,
+            height: 28,
           ),
         ),
         IconButton(
           onPressed: onNotificationPressed,
-          icon: const Icon(
-            Icons.notification_important_outlined,
-            color: AppColors.primaryColor,
-            size: 28,
+          icon: SvgPicture.asset(
+            Assets.imagesNotificationIcon,
+            width: 28,
+            height: 28,
           ),
         ),
       ],

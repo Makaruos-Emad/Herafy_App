@@ -6,6 +6,14 @@ class Assets {
   /// assets/images/loginMobileNumber.svg
   static const String imagesLoginMobileNumber = "assets/images/loginMobileNumber.svg";
 
+  /// Assets for imagesMapPinIcon
+  /// assets/images/map_pin_icon.svg
+  static const String imagesMapPinIcon = "assets/images/map_pin_icon.svg";
+
+  /// Assets for imagesNotificationIcon
+  /// assets/images/notification_icon.svg
+  static const String imagesNotificationIcon = "assets/images/notification_icon.svg";
+
   /// Assets for imagesOnboardingImageOne
   /// assets/images/onboarding_image_one.svg
   static const String imagesOnboardingImageOne = "assets/images/onboarding_image_one.svg";
