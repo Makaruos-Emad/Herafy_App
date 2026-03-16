@@ -33,10 +33,10 @@ class AppTextStyles {
     color: AppColors.white,
   );
 
-  static const TextStyle semiBold16Black = TextStyle(
+  static const TextStyle semiBold20Black = TextStyle(
     fontFamily: fontFamily,
     fontWeight: FontWeightHelper.semiBold,
-    fontSize: 18,
+    fontSize: 20,
     color: AppColors.black,
   );
 }
