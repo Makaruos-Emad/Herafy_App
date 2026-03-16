@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/features/auth/ui/allow_location_screen.dart';
 import 'package:herafy/features/auth/ui/complete_profile_screen.dart';
 import 'package:herafy/features/auth/ui/login_number_screen.dart';
 import 'package:herafy/core/routing/routes.dart';
@@ -27,7 +28,9 @@ class AppRouter {
 
       case Routes.completeProfileScreen:
         return MaterialPageRoute(builder: (_) =>  CompleteProfileScreen());  
-
+      
+      case Routes.allowLocationScreen:
+        return MaterialPageRoute(builder: (_) =>  AllowLocationScreen());
       default:
         return null;
     }

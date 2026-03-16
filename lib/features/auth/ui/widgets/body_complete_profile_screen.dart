@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_field.dart';
-import 'package:herafy/features/auth/data/models/list_contry_code.dart';
+import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/add_image_profile_widget.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
 
@@ -60,7 +61,12 @@ class BodyCompleteProfileScreen extends StatelessWidget {
           const SizedBox(height: 12),
           SafeArea(
             top: false,
-            child: CustomButton(onPressed: () {}, text: 'استمرار'),
+            child: CustomButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.allowLocationScreen);
+              },
+              text: 'استمرار',
+            ),
           ),
         ],
       ),

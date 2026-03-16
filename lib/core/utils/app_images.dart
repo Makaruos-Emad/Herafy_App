@@ -2,13 +2,13 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesAllowLocation
+  /// assets/images/allow_location.svg
+  static const String imagesAllowLocation = "assets/images/allow_location.svg";
+
   /// Assets for imagesLoginMobileNumber
   /// assets/images/loginMobileNumber.svg
   static const String imagesLoginMobileNumber = "assets/images/loginMobileNumber.svg";
-
-  /// Assets for imagesMullerImage
-  /// assets/images/muller_image.jpeg
-  static const String imagesMullerImage = "assets/images/muller_image.jpeg";
 
   /// Assets for imagesNoImage
   /// assets/images/no_image.jpg
@@ -25,10 +25,6 @@ class Assets {
   /// Assets for imagesOnboardingImageTwo
   /// assets/images/onboarding_image_two.svg
   static const String imagesOnboardingImageTwo = "assets/images/onboarding_image_two.svg";
-
-  /// Assets for imagesProfileImage
-  /// assets/images/profile_image.png
-  static const String imagesProfileImage = "assets/images/profile_image.png";
 
   /// Assets for imagesSelectClient
   /// assets/images/select_client.png

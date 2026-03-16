@@ -71,5 +71,11 @@
 
     <key>NSCameraUsageDescription</key>
     <string>We need access to your camera to take a profile picture.</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location to determine your position</string>
+
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs access to location</string>
 </dict>
 </plist>

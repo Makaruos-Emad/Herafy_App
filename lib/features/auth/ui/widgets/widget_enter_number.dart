@@ -3,7 +3,7 @@ import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_field.dart';
-import 'package:herafy/features/auth/data/models/list_contry_code.dart';
+import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
 
 class WidgetEnterNumber extends StatelessWidget {

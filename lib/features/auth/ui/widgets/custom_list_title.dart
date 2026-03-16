@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
-import 'package:herafy/features/auth/data/models/list_contry_code.dart';
+import 'package:herafy/features/auth/models/list_contry.dart';
 
 class CustomListTitle extends StatefulWidget {
   const CustomListTitle({
