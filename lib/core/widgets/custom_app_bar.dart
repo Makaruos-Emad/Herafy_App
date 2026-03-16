@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: onpress,
         icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
       ),
-      title: Align(child: Text(title, style: AppTextStyles.semiBold16Black)),
+      title: Align(child: Text(title, style: AppTextStyles.semiBold20Black)),
       actions: [SizedBox(width: 50)],
     );
   }

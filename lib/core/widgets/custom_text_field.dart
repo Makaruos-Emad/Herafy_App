@@ -6,25 +6,35 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
-    required this.textInputType,
+    this.textInputType,
     this.suffixIcon,
     this.onSaved,
     this.obscureText = false,
     this.textDirection,
     this.suffixText,
+    this.prefixIcon,
+    this.prefixIconOffset = Offset.zero,
+    this.hintStyle,
+    this.lableText,
   });
   final String hintText;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
   final bool obscureText;
   final TextDirection? textDirection;
   final String? suffixText;
+  final Widget? prefixIcon;
+  final Offset prefixIconOffset;
+  final TextStyle? hintStyle;
+  final String? lableText;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       textDirection: textDirection,
       obscureText: obscureText,
+      textAlignVertical: TextAlignVertical.center,
 
       onSaved: onSaved,
       validator: (value) {
@@ -34,13 +44,17 @@ class CustomTextFormField extends StatelessWidget {
         return null;
       },
       keyboardType: textInputType,
-      style: AppTextStyles.semiBold16Black,
+      style: AppTextStyles.semiBold20Black,
       decoration: InputDecoration(
+        labelText: lableText,
         suffixIcon: suffixIcon,
-        hintStyle: AppTextStyles.semiBold16Black,
+        hintStyle: hintStyle,
         hintText: hintText,
         suffixText: suffixText,
-
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(right: 20.0, top: 10.0),
+          child: prefixIcon,
+        ),
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
