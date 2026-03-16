@@ -3,4 +3,5 @@ class Routes {
   static const String loginNumberScreen = '/loginNumberScreen';
   static const String enterCodeScreen = '/enterCodeScreen';
   static const String userTypeSelectionScreen = '/userTypeSelectionScreen';
+  static const String completeProfileScreen = '/completeProfileScreen';
 }
