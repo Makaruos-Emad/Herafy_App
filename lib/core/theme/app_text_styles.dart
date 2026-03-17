@@ -26,6 +26,27 @@ class AppTextStyles {
     color: AppColors.grayBlue,
   );
 
+  static const TextStyle regular16Black = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 16,
+    color: AppColors.black,
+  );
+
+  static const TextStyle regular12PrimaryColor = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 12,
+    color: AppColors.primaryColor,
+  );
+
+  static const TextStyle regular12Black = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 12,
+    color: AppColors.black,
+  );
+
   static const TextStyle semiBold16White = TextStyle(
     fontFamily: fontFamily,
     fontWeight: FontWeightHelper.semiBold,
