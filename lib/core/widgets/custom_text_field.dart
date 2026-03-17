@@ -1,59 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
-import 'package:herafy/core/theme/app_text_styles.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    required this.hintText,
-    required this.textInputType,
-    this.suffixIcon,
-    this.onSaved,
-    this.obscureText = false,
-    this.textDirection,
-    this.suffixText,
-  });
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({super.key, required this.hintText, this.prefixIcon});
   final String hintText;
-  final TextInputType textInputType;
-  final Widget? suffixIcon;
-  final void Function(String?)? onSaved;
-  final bool obscureText;
-  final TextDirection? textDirection;
-  final String? suffixText;
+  final Widget? prefixIcon;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      textDirection: textDirection,
-      obscureText: obscureText,
-
-      onSaved: onSaved,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return hintText;
-        }
-        return null;
-      },
-      keyboardType: textInputType,
-      style: AppTextStyles.semiBold16Black,
+    return TextField(
       decoration: InputDecoration(
-        suffixIcon: suffixIcon,
-        hintStyle: AppTextStyles.semiBold16Black,
         hintText: hintText,
-        suffixText: suffixText,
+        prefixIcon: prefixIcon,
 
-        filled: true,
-        fillColor: const Color(0xFFF9FAFA),
-        border: buildBorder(),
-        enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        border: borderStyle(color: AppColors.lightGrayBlue),
+        focusedBorder: borderStyle(color: AppColors.primaryColor),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder borderStyle({required Color color}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: const BorderSide(width: 1, color: AppColors.primaryColor),
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: color, width: 2),
     );
   }
 }
