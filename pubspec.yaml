@@ -48,6 +48,8 @@ dependencies:
   image_picker: ^1.2.1
   geolocator: ^14.0.2
   permission_handler: ^12.0.1
+  # for state management
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/bottom_navigatoin_bar_icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

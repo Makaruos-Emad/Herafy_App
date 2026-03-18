@@ -6,7 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
-    this.textInputType,
+    required this.textInputType,
     this.suffixIcon,
     this.onSaved,
     this.obscureText = false,
@@ -14,10 +14,11 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixText,
     this.prefixIcon,
     this.hintStyle,
-    this.lableText,
+    this.labelText,
   });
+
   final String hintText;
-  final TextInputType? textInputType;
+  final TextInputType textInputType;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
   final bool obscureText;
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? suffixText;
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
-  final String? lableText;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,6 @@ class CustomTextFormField extends StatelessWidget {
       textDirection: textDirection,
       obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,
-
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -44,15 +44,12 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: textInputType,
       style: AppTextStyles.semiBold20Black,
       decoration: InputDecoration(
-        labelText: lableText,
-        suffixIcon: suffixIcon,
-        hintStyle: hintStyle,
+        labelText: labelText,
         hintText: hintText,
+        hintStyle: hintStyle ?? AppTextStyles.semiBold20Black,
+        suffixIcon: suffixIcon,
         suffixText: suffixText,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(right: 20.0, top: 10.0),
-          child: prefixIcon,
-        ),
+        prefixIcon: prefixIcon,
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
@@ -64,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
 
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(width: 1, color: AppColors.primaryColor),
     );
   }
