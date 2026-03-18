@@ -4,7 +4,7 @@ import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
-import 'package:herafy/core/widgets/custom_text_field.dart';
+import 'package:herafy/core/widgets/custom_text_form_field.dart';
 import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/add_image_profile_widget.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
@@ -37,7 +37,6 @@ class BodyCompleteProfileScreen extends StatelessWidget {
                     hintText: " ادخل الاسم كما يظهر في الهوية",
                     hintStyle: AppTextStyles.regular16GrayBlue,
                     prefixIcon: const FaIcon(FontAwesomeIcons.user),
-                    prefixIconOffset: const Offset(-20, 10),
                   ),
                   SizedBox(height: 10),
                   Text(
