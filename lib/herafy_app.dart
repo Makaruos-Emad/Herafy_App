@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:herafy/core/routing/app_router.dart';
 import 'package:herafy/core/routing/routes.dart';
+import 'package:herafy/core/services/shared_preferences_singleton.dart';
+import 'package:herafy/core/utils/app_constants.dart';
 
 class HerafyApp extends StatelessWidget {
   const HerafyApp({super.key, required this.appRouter});
@@ -28,9 +30,19 @@ class HerafyApp extends StatelessWidget {
           // primaryColor: AppColors.primaryColor,
           appBarTheme: AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         ),
-        initialRoute: Routes.loginNumberScreen,
+        initialRoute: navigateToInitialRoute(),
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
+  }
+}
+
+String navigateToInitialRoute() {
+  bool isOnboardingSeen = Prefs.getBool(kIsOnboardingSeen);
+
+  if (isOnboardingSeen) {
+    return Routes.loginNumberScreen;
+  } else {
+    return Routes.onboardingScreen;
   }
 }
