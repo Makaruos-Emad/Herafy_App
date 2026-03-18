@@ -13,7 +13,6 @@ class CustomTextFormField extends StatelessWidget {
     this.textDirection,
     this.suffixText,
     this.prefixIcon,
-    this.prefixIconOffset = Offset.zero,
     this.hintStyle,
     this.lableText,
   });
@@ -25,7 +24,6 @@ class CustomTextFormField extends StatelessWidget {
   final TextDirection? textDirection;
   final String? suffixText;
   final Widget? prefixIcon;
-  final Offset prefixIconOffset;
   final TextStyle? hintStyle;
   final String? lableText;
 
