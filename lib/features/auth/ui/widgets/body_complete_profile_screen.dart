@@ -37,6 +37,7 @@ class BodyCompleteProfileScreen extends StatelessWidget {
                     hintText: " ادخل الاسم كما يظهر في الهوية",
                     hintStyle: AppTextStyles.regular16GrayBlue,
                     prefixIcon: const FaIcon(FontAwesomeIcons.user),
+                    textInputType: TextInputType.name,
                   ),
                   SizedBox(height: 10),
                   Text(
