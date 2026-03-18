@@ -5,6 +5,7 @@ import 'package:herafy/features/auth/ui/login_number_screen.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
+import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
 
 class AppRouter {
@@ -22,15 +23,17 @@ class AppRouter {
           builder: (_) => EnterCodeScreen(phoneNumber: phoneNumber),
         );
       case Routes.userTypeSelectionScreen:
-        return MaterialPageRoute(
-          builder: (_) =>  UserTypeSelectionScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => UserTypeSelectionScreen());
 
       case Routes.completeProfileScreen:
-        return MaterialPageRoute(builder: (_) =>  CompleteProfileScreen());  
-      
+        return MaterialPageRoute(builder: (_) => CompleteProfileScreen());
+
       case Routes.allowLocationScreen:
-        return MaterialPageRoute(builder: (_) =>  AllowLocationScreen());
+        return MaterialPageRoute(builder: (_) => AllowLocationScreen());
+
+      case Routes.homeClientScreen:
+        return MaterialPageRoute(builder: (_) => HomeClientScreen());
+
       default:
         return null;
     }
