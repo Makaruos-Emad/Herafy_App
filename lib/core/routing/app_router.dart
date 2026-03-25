@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/auth/ui/allow_location_screen.dart';
 import 'package:herafy/features/auth/ui/complete_profile_screen.dart';
 import 'package:herafy/features/auth/ui/login_number_screen.dart';
@@ -7,6 +8,9 @@ import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
+import 'package:herafy/features/service_request/data/best_tech_model.dart';
+import 'package:herafy/features/service_request/logic/cubit/service_requist_cubit.dart';
+import 'package:herafy/features/service_request/ui/select_technician_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -34,6 +38,13 @@ class AppRouter {
       case Routes.homeClientScreen:
         return MaterialPageRoute(builder: (_) => HomeClientScreen());
 
+      case Routes.selectTechnicianScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ServiceRequestCubit(bestTechnicals),
+            child: const SelectTechnicianScreen(),
+          ),
+        );
       default:
         return null;
     }
