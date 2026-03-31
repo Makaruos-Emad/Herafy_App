@@ -7,4 +7,5 @@ class Routes {
   static const String allowLocationScreen = '/allowLocationScreen';
   static const String homeClientScreen = 'homeClientScreen';
   static const String notificationsScreen = 'notificationsScreen';
+  static const String allServicesScreen = 'allServicesScreen';
 }

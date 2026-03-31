@@ -5,6 +5,7 @@ import 'package:herafy/features/auth/ui/login_number_screen.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
+import 'package:herafy/features/home/ui/all_services_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/notification/ui/notifications_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
@@ -37,6 +38,10 @@ class AppRouter {
 
       case Routes.notificationsScreen:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
+
+      case Routes.allServicesScreen:
+        return MaterialPageRoute(builder: (_) => const AllServicesScreen());
+
       default:
         return null;
     }
