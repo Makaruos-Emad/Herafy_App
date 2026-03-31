@@ -60,4 +60,10 @@ class AppTextStyles {
     fontSize: 20,
     color: AppColors.black,
   );
+  static const TextStyle bold16PrimaryColor = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 16,
+    color: AppColors.primaryColor,
+  );
 }
