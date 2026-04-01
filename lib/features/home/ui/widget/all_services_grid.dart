@@ -15,9 +15,9 @@ class AllServicesGrid extends StatelessWidget {
       itemCount: services.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 16,
-        childAspectRatio: 0.9,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 24,
+        childAspectRatio: 1,
       ),
       itemBuilder: (context, index) {
         return AllServiceItem(service: services[index]);

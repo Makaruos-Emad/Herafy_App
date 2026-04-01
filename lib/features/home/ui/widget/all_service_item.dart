@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/theme/app_colors.dart';
+import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/features/home/model/all_services_item_model.dart';
 
 class AllServiceItem extends StatelessWidget {
   final AllServicesItemModel service;
+  final VoidCallback? onTap;
 
-  const AllServiceItem({super.key, required this.service});
+  const AllServiceItem({super.key, required this.service, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Icon(service.icon, color: Colors.blue, size: 28),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          borderRadius: BorderRadius.circular(10),
         ),
-        const SizedBox(height: 8),
-        Text(
-          service.title,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          textAlign: TextAlign.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(service.icon, color: AppColors.primaryColor, size: 30),
+            SizedBox(height: 5),
+            Text(
+              service.title,
+              style: AppTextStyles.regular12Black,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
