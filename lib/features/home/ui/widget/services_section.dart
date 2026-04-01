@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/features/home/model/service_model.dart';
 import 'package:herafy/features/home/ui/widget/service_item.dart';
 import 'package:herafy/features/home/ui/widget/view_all.dart';
@@ -17,7 +18,12 @@ class ServicesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ViewAll(title: 'الخدمات'),
+        ViewAll(
+          title: 'الخدمات',
+          onTap: () {
+            Navigator.pushNamed(context, Routes.allServicesScreen);
+          },
+        ),
         const SizedBox(height: 8),
 
         GridView.builder(
