@@ -74,6 +74,10 @@ class Assets {
   /// assets/images/search_icon.svg
   static const String imagesSearchIcon = "assets/images/search_icon.svg";
 
+  /// Assets for imagesSeccessfulPng
+  /// assets/images/seccessful_png.png
+  static const String imagesSeccessfulPng = "assets/images/seccessful_png.png";
+
   /// Assets for imagesSelectClient
   /// assets/images/select_client.png
   static const String imagesSelectClient = "assets/images/select_client.png";
