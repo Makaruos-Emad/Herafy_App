@@ -6,18 +6,20 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.onPressed,
-    required this.text,
+    this.text,
     this.backgroundColor,
     this.disabledBackgroundColor,
     this.textStyle,
     this.side,
+    this.child,
   });
   final VoidCallback? onPressed;
-  final String text;
+  final String? text;
   final Color? backgroundColor;
   final Color? disabledBackgroundColor;
   final TextStyle? textStyle;
   final BorderSide? side;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,13 +29,12 @@ class CustomButton extends StatelessWidget {
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           side: side,
-          backgroundColor:
-              onPressed == null
-                  ? (disabledBackgroundColor ?? AppColors.lightGray)
-                  : (backgroundColor ?? AppColors.primaryColor),
+          backgroundColor: onPressed == null
+              ? (disabledBackgroundColor ?? AppColors.lightGray)
+              : (backgroundColor ?? AppColors.primaryColor),
         ),
         onPressed: onPressed,
-        child: Text(text, style: textStyle ?? AppTextStyles.semiBold16White),
+        child: child != null ? child! :Text(text!, style: textStyle ?? AppTextStyles.semiBold16White) ,
       ),
     );
   }

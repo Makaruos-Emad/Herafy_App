@@ -3,6 +3,7 @@ import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_form_field.dart';
+import 'package:herafy/features/auth/data/country_name.dart';
 import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
 
@@ -43,12 +44,22 @@ class WidgetEnterNumber extends StatelessWidget {
               ),
 
               const SizedBox(width: 8),
-              CustomListTitle(
-                listItems: countries,
-                leadingIcon: null,
+              CustomListTitle<Country>(
+                items: countries,
+                titleBuilder: (country) => country.title,
                 initialSelected: _selectedCountry.value,
                 showSelectedTitle: false,
-                onCountrySelected: (country) {
+                leadingBuilder: (country) => country.flag == null
+                    ? null
+                    : Text(country.flag!, style: const TextStyle(fontSize: 20)),
+                trailingBuilder: (country) => country.code == null
+                    ? null
+                    : Text(
+                        country.code!,
+                        textDirection: TextDirection.ltr,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                onSelected: (country) {
                   _selectedCountry.value = country;
                 },
               ),

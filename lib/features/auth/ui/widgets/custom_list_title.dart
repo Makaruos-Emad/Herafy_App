@@ -1,45 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
-import 'package:herafy/features/auth/models/list_contry.dart';
 
-class CustomListTitle extends StatefulWidget {
+class CustomListTitle<T> extends StatefulWidget {
   const CustomListTitle({
     super.key,
-    required this.onCountrySelected,
-    required this.listItems,
-    required this.leadingIcon,
+    required this.items,
+    required this.titleBuilder,
+    required this.onSelected,
+    this.selected,
     this.initialSelected,
+    this.leading,
+    this.leadingBuilder,
+    this.trailingBuilder,
     this.showSelectedTitle = true,
     this.placeholderText,
   });
 
-  final ValueChanged<Country> onCountrySelected;
-  final List<Country> listItems;
-  final Icon? leadingIcon;
-  final Country? initialSelected;
+  final List<T> items;
+  final String Function(T item) titleBuilder;
+  final ValueChanged<T> onSelected;
+  final T? selected;
+  final T? initialSelected;
+  final Widget? leading;
+  final Widget? Function(T item)? leadingBuilder;
+  final Widget? Function(T item)? trailingBuilder;
   final bool showSelectedTitle;
   final String? placeholderText;
 
   @override
-  State<CustomListTitle> createState() => _CustomListTitleState();
+  State<CustomListTitle<T>> createState() => _CustomListTitleState<T>();
 }
 
-class _CustomListTitleState extends State<CustomListTitle> {
-  Country? _selected;
+class _CustomListTitleState<T> extends State<CustomListTitle<T>> {
+  T? _selected;
 
   @override
   void initState() {
     super.initState();
-    _selected = widget.initialSelected ??
-        (widget.placeholderText == null ? widget.listItems.first : null);
+    _selected = widget.selected ??
+        widget.initialSelected ??
+        (widget.placeholderText == null ? widget.items.firstOrNull : null);
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomListTitle<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selected != oldWidget.selected) {
+      _selected = widget.selected;
+    }
+  }
+
+  T? get _effectiveSelected => widget.selected ?? _selected;
+
+  Widget? _buildLeading(T? selected) {
+    if (selected == null) return widget.leading;
+    return widget.leadingBuilder?.call(selected) ?? widget.leading;
   }
 
   @override
   Widget build(BuildContext context) {
-    final selected = _selected;
-    final shouldShowTitle = selected == null ||
-        widget.showSelectedTitle ||
-        selected.flag == null;
+    final selected = _effectiveSelected;
+    final leading = _buildLeading(selected);
+
+    final shouldShowTitle =
+        selected == null || widget.showSelectedTitle || leading == null;
 
     return GestureDetector(
       onTap: () {
@@ -47,26 +71,22 @@ class _CustomListTitleState extends State<CustomListTitle> {
           context: context,
           builder: (_) {
             return ListView.builder(
-              itemCount: widget.listItems.length,
+              itemCount: widget.items.length,
               itemBuilder: (context, index) {
-                final item = widget.listItems[index];
+                final item = widget.items[index];
                 return ListTile(
-                  leading: item.flag == null
-                      ? widget.leadingIcon
-                      : Text(item.flag!, style: const TextStyle(fontSize: 20)),
-                  title: Text(item.title, style: const TextStyle(fontSize: 20)),
-                  trailing: item.code == null
-                      ? null
-                      : Text(
-                          item.code!,
-                          textDirection: TextDirection.ltr,
-                          style: const TextStyle(fontSize: 16),
-                        ),
+                  leading:
+                      widget.leadingBuilder?.call(item) ?? widget.leading,
+                  title: Text(
+                    widget.titleBuilder(item),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  trailing: widget.trailingBuilder?.call(item),
                   onTap: () {
                     setState(() {
                       _selected = item;
                     });
-                    widget.onCountrySelected(item);
+                    widget.onSelected(item);
                     Navigator.pop(context);
                   },
                 );
@@ -85,18 +105,8 @@ class _CustomListTitleState extends State<CustomListTitle> {
           children: () {
             final children = <Widget>[];
 
-            if (selected == null) {
-              if (widget.leadingIcon != null) {
-                children.add(widget.leadingIcon!);
-              }
-            } else {
-              if (selected.flag == null && widget.leadingIcon != null) {
-                children.add(widget.leadingIcon!);
-              } else if (selected.flag != null) {
-                children.add(
-                  Text(selected.flag!, style: const TextStyle(fontSize: 20)),
-                );
-              }
+            if (leading != null) {
+              children.add(leading);
             }
 
             if (shouldShowTitle) {
@@ -105,7 +115,9 @@ class _CustomListTitleState extends State<CustomListTitle> {
               }
               children.add(
                 Text(
-                  selected?.title ?? (widget.placeholderText ?? ""),
+                  selected == null
+                      ? (widget.placeholderText ?? "")
+                      : widget.titleBuilder(selected),
                   style: TextStyle(
                     fontSize: 18,
                     color: selected == null ? Theme.of(context).hintColor : null,
@@ -126,4 +138,8 @@ class _CustomListTitleState extends State<CustomListTitle> {
       ),
     );
   }
+}
+
+extension _FirstOrNullExt<T> on List<T> {
+  T? get firstOrNull => isEmpty ? null : first;
 }
