@@ -8,9 +8,15 @@ import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
+import 'package:herafy/features/profile/ui/edit_profile_screen.dart';
 import 'package:herafy/features/service_request/data/best_tech_model.dart';
 import 'package:herafy/features/service_request/logic/cubit/service_requist_cubit.dart';
+import 'package:herafy/features/service_request/models/check_request_args.dart';
+import 'package:herafy/features/service_request/ui/book_appointment_screen.dart';
+import 'package:herafy/features/service_request/ui/check_request_screen.dart';
 import 'package:herafy/features/service_request/ui/select_technician_screen.dart';
+import 'package:herafy/features/service_request/ui/success_request_screen.dart';
+import 'package:herafy/features/service_request/ui/tech_selected_profile_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -45,8 +51,47 @@ class AppRouter {
             child: const SelectTechnicianScreen(),
           ),
         );
+      case Routes.technicialSelectedProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) => const TechSelectedProfileScreen(),
+        );
+      case Routes.bookAppointmentScreen:
+        return MaterialPageRoute(builder: (context) => BookAppointmentScreen());
+      case Routes.checkRequestScreen:
+        final args = settings.arguments;
+        if (args is! CheckRequestArgs) {
+          return _errorRoute(
+            'Missing/invalid arguments for ${Routes.checkRequestScreen}. '
+            'Expected CheckRequestArgs.',
+          );
+        }
+        return MaterialPageRoute(
+          builder: (context) => CheckRequestScreen(
+            time: args.time,
+            date: args.date,
+            address: args.address,
+            governorate: args.governorate,
+            center: args.center,
+          ),
+        );
+
+      case Routes.successRequestScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SuccessRequestScreen(),
+        );
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(builder: (_) => EditProfileScreen());  
       default:
         return null;
     }
+  }
+
+  Route _errorRoute(String message) {
+    return MaterialPageRoute(
+      builder: (_) => Scaffold(
+        appBar: AppBar(title: const Text('Routing Error')),
+        body: Center(child: Text(message, textAlign: TextAlign.center)),
+      ),
+    );
   }
 }

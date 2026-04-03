@@ -50,6 +50,10 @@ dependencies:
   permission_handler: ^12.0.1
   # for state management
   flutter_bloc: ^9.1.1
+  readmore: ^3.0.0
+  # for maps screen
+  geocoding: ^4.0.0
+  
 
 dev_dependencies:
   flutter_test:

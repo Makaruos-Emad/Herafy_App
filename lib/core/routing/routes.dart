@@ -7,4 +7,9 @@ class Routes {
   static const String allowLocationScreen = '/allowLocationScreen';
   static const String homeClientScreen = 'homeClientScreen';
   static const String selectTechnicianScreen = 'selectTechnicianScreen';
+  static const String technicialSelectedProfileScreen = 'technicialSelectedProfileScreen';
+  static const String bookAppointmentScreen = 'bookAppointmentScreen';
+  static const String checkRequestScreen = 'checkRequestScreen';
+  static const String successRequestScreen = 'SuccessRequestScreen';
+  static const String editProfileScreen = 'editProfileScreen';
 }
