@@ -12,4 +12,7 @@ class Routes {
   static const String checkRequestScreen = 'checkRequestScreen';
   static const String successRequestScreen = 'SuccessRequestScreen';
   static const String editProfileScreen = 'editProfileScreen';
+  static const String notificationsScreen = 'notificationsScreen';
+  static const String allServicesScreen = 'allServicesScreen';
+  static const String searchScreen = 'searchScreen';
 }

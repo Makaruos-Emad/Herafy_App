@@ -42,6 +42,10 @@ class Assets {
   /// assets/images/bottom_navigatoin_bar_icons/user_blue.svg
   static const String imagesBottomNavigatoinBarIconsUserBlue = "assets/images/bottom_navigatoin_bar_icons/user_blue.svg";
 
+  /// Assets for imagesEmptyNotifications
+  /// assets/images/empty_notifications.svg
+  static const String imagesEmptyNotifications = "assets/images/empty_notifications.svg";
+
   /// Assets for imagesLoginMobileNumber
   /// assets/images/loginMobileNumber.svg
   static const String imagesLoginMobileNumber = "assets/images/loginMobileNumber.svg";
