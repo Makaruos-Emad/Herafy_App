@@ -22,11 +22,7 @@ class _BodyCompleteProfileScreenState extends State<BodyCompleteProfileScreen> {
   final TextEditingController _fullNameController = TextEditingController();
   Country? _selectedGovernorate;
   String? _selectedCenter;
-
-  bool get _canContinue =>
-      _fullNameController.text.trim().isNotEmpty &&
-      _selectedGovernorate != null &&
-      _selectedCenter != null;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -51,64 +47,83 @@ class _BodyCompleteProfileScreenState extends State<BodyCompleteProfileScreen> {
     final centers = _selectedGovernorate?.centers ?? const <String>[];
     return Padding(
       padding: const EdgeInsets.all(kHorizontalPadding),
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(
-                textDirection: TextDirection.rtl,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AddImageProfileWidget(),
-                  SizedBox(height: 30),
-                  Text(
-                    "الاسم بالكامل",
-                    style: AppTextStyles.semiBold20Black,
-                    textAlign: TextAlign.right,
-                  ),
-                  SizedBox(height: 10),
-                  CustomTextFormField(
-                    hintText: " ادخل الاسم كما يظهر في الهوية",
-                    hintStyle: AppTextStyles.regular16GrayBlue,
-                    prefixIcon: const FaIcon(FontAwesomeIcons.user),
-                    textInputType: TextInputType.name,
-                    controller: _fullNameController,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "المحافظة",
-                    style: AppTextStyles.semiBold20Black,
-                    textAlign: TextAlign.right,
-                  ),
-                  SizedBox(height: 10),
-                  CustomListTitle<Country>(
-                    items: governorates,
-                    titleBuilder: (g) => g.title,
-                    selected: _selectedGovernorate,
-                    leading: const Icon(Icons.location_city),
-                    placeholderText: "اختار محافظة من فضلك",
-                    onSelected: (governorate) {
-                      setState(() {
-                        _selectedGovernorate = governorate;
-                        _selectedCenter = null;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  if (_selectedGovernorate != null) ...[
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Column(
+                  textDirection: TextDirection.rtl,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AddImageProfileWidget(),
+                    SizedBox(height: 30),
+                    Text(
+                      "الاسم بالكامل",
+                      style: AppTextStyles.semiBold20Black,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(height: 10),
+                    CustomTextFormField(
+                      hintText: " ادخل الاسم كما يظهر في الهوية",
+                      hintStyle: AppTextStyles.regular16GrayBlue,
+                      prefixIcon: const FaIcon(FontAwesomeIcons.user),
+                      textInputType: TextInputType.name,
+                      controller: _fullNameController,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "المحافظة",
+                      style: AppTextStyles.semiBold20Black,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(height: 10),
+                    CustomListTitleFormField<Country>(
+                      items: governorates,
+                      titleBuilder: (g) => g.title,
+                      initialValue: _selectedGovernorate,
+                      leading: const Icon(Icons.location_city),
+                      placeholderText: "اختار محافظة من فضلك",
+
+                      validator: (value) {
+                        if (value == null) {
+                          return "من فضلك اختار المحافظة";
+                        }
+                        return null;
+                      },
+
+                      onSelected: (governorate) {
+                        setState(() {
+                          _selectedGovernorate = governorate;
+                          _selectedCenter = null;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 12),
+
                     Text(
                       "المركز",
                       style: AppTextStyles.semiBold20Black,
                       textAlign: TextAlign.right,
                     ),
                     const SizedBox(height: 10),
-                    CustomListTitle<String>(
+                    CustomListTitleFormField<String>(
                       items: centers,
                       titleBuilder: (c) => c,
-                      selected: _selectedCenter,
+                      initialValue: _selectedCenter,
                       leading: const Icon(Icons.location_on_outlined),
                       placeholderText: "اختار مركز من فضلك",
+
+                      validator: (value) {
+                        if (value == null) {
+                          return "من فضلك اختار المركز";
+                        }
+                        return null;
+                      },
+
                       onSelected: (center) {
                         setState(() {
                           _selectedCenter = center;
@@ -116,23 +131,25 @@ class _BodyCompleteProfileScreenState extends State<BodyCompleteProfileScreen> {
                       },
                     ),
                   ],
-                ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 12),
-          SafeArea(
-            top: false,
-            child: CustomButton(
-              onPressed: _canContinue
-                  ? () {
-                      Navigator.pushNamed(context, Routes.allowLocationScreen);
-                    }
-                  : null,
-              text: 'استمرار',
+            const SizedBox(height: 12),
+            SafeArea(
+              top: false,
+              child: CustomButton(
+                onPressed: () {
+                  final isValid = _formKey.currentState!.validate();
+
+                  if (isValid) {
+                    Navigator.pushNamed(context, Routes.allowLocationScreen);
+                  }
+                },
+                text: 'استمرار',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@ class AllowLocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: ""),
+      appBar: CustomAppBar(title: "", onpress: () {Navigator.pop(context);}),
       body: Padding(
         padding: const EdgeInsets.all(kHorizontalPadding),
         child: Column(
