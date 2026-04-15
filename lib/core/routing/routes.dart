@@ -18,4 +18,5 @@ class Routes {
   static const String completeTechnicialProfileScreen = 'completeTechnicialProfileScreen';
   static const String uploadIdTechnicialScreen = 'uploadIdTechnicialScreen';
   static const String checkTechIdSuccessScreen = 'checkTechIdSuccessScreen';
+  static const String taskDetailsScreen = 'taskDetailsScreen';
 }

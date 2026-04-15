@@ -23,6 +23,7 @@ import 'package:herafy/features/service_request/ui/check_request_screen.dart';
 import 'package:herafy/features/service_request/ui/select_technician_screen.dart';
 import 'package:herafy/features/service_request/ui/success_request_screen.dart';
 import 'package:herafy/features/service_request/ui/tech_selected_profile_screen.dart';
+import 'package:herafy/features/technical_task/ui/task_details_screnn.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -100,13 +101,14 @@ class AppRouter {
           builder: (_) => const CompleteProfileTechnicalScreen(),
         );
       case Routes.uploadIdTechnicialScreen:
-        return MaterialPageRoute(
-          builder: (_) =>  UploadIdTechScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => UploadIdTechScreen());
       case Routes.checkTechIdSuccessScreen:
         return MaterialPageRoute(
           builder: (_) => const CheckTechIdSuccessScreen(),
         );
+
+      case Routes.taskDetailsScreen:
+        return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
       default:
         return null;
     }
