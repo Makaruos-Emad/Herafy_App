@@ -1,145 +1,127 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 
-class CustomListTitle<T> extends StatefulWidget {
-  const CustomListTitle({
+class CustomListTitleFormField<T> extends FormField<T> {
+  CustomListTitleFormField({
     super.key,
-    required this.items,
-    required this.titleBuilder,
-    required this.onSelected,
-    this.selected,
-    this.initialSelected,
-    this.leading,
-    this.leadingBuilder,
-    this.trailingBuilder,
-    this.showSelectedTitle = true,
-    this.placeholderText,
-  });
+    required List<T> items,
+    required String Function(T item) titleBuilder,
+    required ValueChanged<T> onSelected,
+    super.initialValue,
+    Widget? leading,
+    Widget? Function(T item)? leadingBuilder,
+    Widget? Function(T item)? trailingBuilder,
+    bool showSelectedTitle = true,
+    String? placeholderText,
+    super.validator,
+    AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+  }) : super(
+          builder: (FormFieldState<T> state) {
+            final selected = state.value;
 
-  final List<T> items;
-  final String Function(T item) titleBuilder;
-  final ValueChanged<T> onSelected;
-  final T? selected;
-  final T? initialSelected;
-  final Widget? leading;
-  final Widget? Function(T item)? leadingBuilder;
-  final Widget? Function(T item)? trailingBuilder;
-  final bool showSelectedTitle;
-  final String? placeholderText;
+            Widget? buildLeading(T? selected) {
+              if (selected == null) return leading;
+              return leadingBuilder?.call(selected) ?? leading;
+            }
 
-  @override
-  State<CustomListTitle<T>> createState() => _CustomListTitleState<T>();
-}
+            final leadingWidget = buildLeading(selected);
 
-class _CustomListTitleState<T> extends State<CustomListTitle<T>> {
-  T? _selected;
+            final shouldShowTitle =
+                selected == null || showSelectedTitle || leadingWidget == null;
 
-  @override
-  void initState() {
-    super.initState();
-    _selected = widget.selected ??
-        widget.initialSelected ??
-        (widget.placeholderText == null ? widget.items.firstOrNull : null);
-  }
-
-  @override
-  void didUpdateWidget(covariant CustomListTitle<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.selected != oldWidget.selected) {
-      _selected = widget.selected;
-    }
-  }
-
-  T? get _effectiveSelected => widget.selected ?? _selected;
-
-  Widget? _buildLeading(T? selected) {
-    if (selected == null) return widget.leading;
-    return widget.leadingBuilder?.call(selected) ?? widget.leading;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final selected = _effectiveSelected;
-    final leading = _buildLeading(selected);
-
-    final shouldShowTitle =
-        selected == null || widget.showSelectedTitle || leading == null;
-
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (_) {
-            return ListView.builder(
-              itemCount: widget.items.length,
-              itemBuilder: (context, index) {
-                final item = widget.items[index];
-                return ListTile(
-                  leading:
-                      widget.leadingBuilder?.call(item) ?? widget.leading,
-                  title: Text(
-                    widget.titleBuilder(item),
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  trailing: widget.trailingBuilder?.call(item),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
                   onTap: () {
-                    setState(() {
-                      _selected = item;
-                    });
-                    widget.onSelected(item);
-                    Navigator.pop(context);
+                    showModalBottomSheet(
+                      context: state.context,
+                      builder: (_) {
+                        return ListView.builder(
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            final item = items[index];
+                            return ListTile(
+                              leading:
+                                  leadingBuilder?.call(item) ?? leading,
+                              title: Text(
+                                titleBuilder(item),
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                              trailing: trailingBuilder?.call(item),
+                              onTap: () {
+                                state.didChange(item); // 🔥 المهم
+                                onSelected(item);
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
                   },
-                );
-              },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 14),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: state.hasError
+                            ? Colors.red
+                            : AppColors.primaryColor,
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Row(
+                      children: () {
+                        final children = <Widget>[];
+
+                        if (leadingWidget != null) {
+                          children.add(leadingWidget);
+                        }
+
+                        if (shouldShowTitle) {
+                          if (children.isNotEmpty) {
+                            children.add(const SizedBox(width: 6));
+                          }
+                          children.add(
+                            Text(
+                              selected == null
+                                  ? (placeholderText ?? "")
+                                  : titleBuilder(selected),
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: selected == null
+                                    ? Theme.of(state.context).hintColor
+                                    : null,
+                              ),
+                            ),
+                          );
+                        }
+
+                        if (children.isNotEmpty) {
+                          children.add(const SizedBox(width: 6));
+                        }
+
+                        children.add(const Icon(Icons.arrow_drop_down));
+
+                        return children;
+                      }(),
+                    ),
+                  ),
+                ),
+
+                /// 🔥 error text
+                if (state.hasError)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5, right: 5),
+                    child: Text(
+                      state.errorText!,
+                      style: const TextStyle(
+                          color: Colors.red, fontSize: 12),
+                    ),
+                  ),
+              ],
             );
           },
         );
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primaryColor),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          children: () {
-            final children = <Widget>[];
-
-            if (leading != null) {
-              children.add(leading);
-            }
-
-            if (shouldShowTitle) {
-              if (children.isNotEmpty) {
-                children.add(const SizedBox(width: 6));
-              }
-              children.add(
-                Text(
-                  selected == null
-                      ? (widget.placeholderText ?? "")
-                      : widget.titleBuilder(selected),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: selected == null ? Theme.of(context).hintColor : null,
-                  ),
-                ),
-              );
-            }
-
-            if (children.isNotEmpty) {
-              children.add(const SizedBox(width: 6));
-            }
-
-            children.add(const Icon(Icons.arrow_drop_down));
-
-            return children;
-          }(),
-        ),
-      ),
-    );
-  }
-}
-
-extension _FirstOrNullExt<T> on List<T> {
-  T? get firstOrNull => isEmpty ? null : first;
 }

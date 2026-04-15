@@ -15,4 +15,7 @@ class Routes {
   static const String notificationsScreen = 'notificationsScreen';
   static const String allServicesScreen = 'allServicesScreen';
   static const String searchScreen = 'searchScreen';
+  static const String completeTechnicialProfileScreen = 'completeTechnicialProfileScreen';
+  static const String uploadIdTechnicialScreen = 'uploadIdTechnicialScreen';
+  static const String checkTechIdSuccessScreen = 'checkTechIdSuccessScreen';
 }

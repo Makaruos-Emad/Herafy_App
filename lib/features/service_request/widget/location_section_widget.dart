@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/features/auth/data/country_name.dart';
@@ -9,7 +8,7 @@ class LocationSection extends StatelessWidget {
   final Country? selectedGovernorate;
   final String? selectedCenter;
   final Function(Country) onGovernorateSelected;
-  final Function(String) onCenterSelected;
+  final Function(String?) onCenterSelected;
 
   const LocationSection({
     super.key,
@@ -22,43 +21,62 @@ class LocationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final centers =
-        selectedGovernorate?.centers ?? const <String>[];
+    final centers = selectedGovernorate?.centers ?? const <String>[];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("اختار اسم المحافظة",
-            style: AppTextStyles.semiBold20Black),
+        Text("اختار اسم المحافظة", style: AppTextStyles.semiBold20Black),
         SizedBox(height: height * 0.015),
 
-        CustomListTitle<Country>(
+        CustomListTitleFormField<Country>(
           items: governorates,
           titleBuilder: (g) => g.title,
-          selected: selectedGovernorate,
+          initialValue: selectedGovernorate,
           leading: const Icon(Icons.location_city),
           placeholderText: "اختار محافظة من فضلك",
-          onSelected: onGovernorateSelected,
+
+          validator: (value) {
+            if (value == null) {
+              return "من فضلك اختار المحافظة";
+            }
+            return null;
+          },
+
+          onSelected: (governorate) {
+            onGovernorateSelected(governorate);
+
+            /// 🔥 reset للمركز
+            onCenterSelected(null);
+          },
         ),
 
         SizedBox(height: height * 0.02),
 
-        if (selectedGovernorate != null) ...[
-          Text("المركز",
-              style: AppTextStyles.semiBold20Black),
+        
+          Text("المركز", style: AppTextStyles.semiBold20Black),
           SizedBox(height: height * 0.015),
 
-          CustomListTitle<String>(
+          CustomListTitleFormField<String>(
             items: centers,
             titleBuilder: (c) => c,
-            selected: selectedCenter,
-            leading:
-                const Icon(Icons.location_on_outlined),
+            initialValue: selectedCenter,
+            leading: const Icon(Icons.location_on_outlined),
             placeholderText: "اختار مركز من فضلك",
-            onSelected: onCenterSelected,
+
+            validator: (value) {
+              if (value == null) {
+                return "من فضلك اختار المركز";
+              }
+              return null;
+            },
+
+            onSelected: (center) {
+              onCenterSelected(center);
+            },
           ),
         ],
-      ],
+      
     );
   }
 }
