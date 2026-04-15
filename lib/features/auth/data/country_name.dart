@@ -1,29 +1,5 @@
 import 'package:herafy/features/auth/models/list_contry.dart';
 
-final List<Country> countries = [
-  Country(title: "مصر", code: "+20", flag: "🇪🇬"),
-  Country(title: "السعودية", code: "+966", flag: "🇸🇦"),
-  Country(title: "الإمارات", code: "+971", flag: "🇦🇪"),
-  Country(title: "قطر", code: "+974", flag: "🇶🇦"),
-  Country(title: "الكويت", code: "+965", flag: "🇰🇼"),
-  Country(title: "البحرين", code: "+973", flag: "🇧🇭"),
-  Country(title: "عُمان", code: "+968", flag: "🇴🇲"),
-  Country(title: "الأردن", code: "+962", flag: "🇯🇴"),
-  Country(title: "لبنان", code: "+961", flag: "🇱🇧"),
-  Country(title: "سوريا", code: "+963", flag: "🇸🇾"),
-  Country(title: "العراق", code: "+964", flag: "🇮🇶"),
-  Country(title: "فلسطين", code: "+970", flag: "🇵🇸"),
-  Country(title: "السودان", code: "+249", flag: "🇸🇩"),
-  Country(title: "ليبيا", code: "+218", flag: "🇱🇾"),
-  Country(title: "تونس", code: "+216", flag: "🇹🇳"),
-  Country(title: "الجزائر", code: "+213", flag: "🇩🇿"),
-  Country(title: "المغرب", code: "+212", flag: "🇲🇦"),
-  Country(title: "موريتانيا", code: "+222", flag: "🇲🇷"),
-  Country(title: "الصومال", code: "+252", flag: "🇸🇴"),
-  Country(title: "جيبوتي", code: "+253", flag: "🇩🇯"),
-  Country(title: "جزر القمر", code: "+269", flag: "🇰🇲"),
-];
-
 final List<Country> governorates = [
   Country(
     title: "القاهرة",

@@ -188,6 +188,19 @@ class _BodyCompleteTechnicalProfileScreenState
                       prefixIcon: const FaIcon(FontAwesomeIcons.clock),
                       textInputType: TextInputType.number,
                     ),
+                    SizedBox(height: 10),
+                    Text(
+                      "سعر المعاينة",
+                      style: AppTextStyles.semiBold20Black,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(height: 10),
+                    CustomTextFormField(
+                      hintText: "ادخل سعر المعاينة",
+                      hintStyle: AppTextStyles.regular16GrayBlue,
+                      prefixIcon: const FaIcon(FontAwesomeIcons.moneyBillWave),
+                      textInputType: TextInputType.number,
+                    ),
                   ],
                 ),
               ),
@@ -200,7 +213,10 @@ class _BodyCompleteTechnicalProfileScreenState
                   final isValid = _formKey.currentState!.validate();
 
                   if (isValid) {
-                    Navigator.pushNamed(context, Routes.allowLocationScreen);
+                    Navigator.pushNamed(
+                      context,
+                      Routes.uploadIdTechnicialScreen,
+                    );
                   }
                 },
                 text: 'استمرار',

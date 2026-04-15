@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
-import 'package:herafy/features/service_request/widget/check_screen_widget/base_card_container.dart';
+import 'package:herafy/core/widgets/base_card_container.dart';
 import 'package:herafy/features/service_request/widget/check_screen_widget/info_widget.dart';
 import 'package:herafy/features/service_request/widget/check_screen_widget/section_title.dart';
 

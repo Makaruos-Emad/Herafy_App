@@ -10,15 +10,16 @@ import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/add_image_profile_widget.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
 
-class BodyCompleteProfileScreen extends StatefulWidget {
-  const BodyCompleteProfileScreen({super.key});
+class BodyCompleteClientProfileScreen extends StatefulWidget {
+  const BodyCompleteClientProfileScreen({super.key});
 
   @override
-  State<BodyCompleteProfileScreen> createState() =>
-      _BodyCompleteProfileScreenState();
+  State<BodyCompleteClientProfileScreen> createState() =>
+      _BodyCompleteClientProfileScreenState();
 }
 
-class _BodyCompleteProfileScreenState extends State<BodyCompleteProfileScreen> {
+class _BodyCompleteClientProfileScreenState
+    extends State<BodyCompleteClientProfileScreen> {
   final TextEditingController _fullNameController = TextEditingController();
   Country? _selectedGovernorate;
   String? _selectedCenter;

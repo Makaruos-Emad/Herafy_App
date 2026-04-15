@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_images.dart';
-import 'package:herafy/features/service_request/widget/check_screen_widget/base_card_container.dart';
+import 'package:herafy/core/widgets/base_card_container.dart';
 import 'package:herafy/features/service_request/widget/check_screen_widget/warning_banner.dart';
 class ProviderCard extends StatelessWidget {
   final double width;
