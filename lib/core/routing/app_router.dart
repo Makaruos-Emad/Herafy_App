@@ -9,6 +9,9 @@ import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
 import 'package:herafy/features/home/ui/all_services_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/home/ui/search_screen.dart';
+import 'package:herafy/features/login_technical/ui/check_tech_id_success_screen.dart';
+import 'package:herafy/features/login_technical/ui/complete_profile_technical_screen.dart';
+import 'package:herafy/features/login_technical/ui/upload_id_tech_screen.dart';
 import 'package:herafy/features/notification/ui/notifications_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
 import 'package:herafy/features/profile/ui/edit_profile_screen.dart';
@@ -39,7 +42,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => UserTypeSelectionScreen());
 
       case Routes.completeProfileScreen:
-        return MaterialPageRoute(builder: (_) => CompleteProfileScreen());
+        return MaterialPageRoute(builder: (_) => CompleteClientProfileScreen());
 
       case Routes.allowLocationScreen:
         return MaterialPageRoute(builder: (_) => AllowLocationScreen());
@@ -83,7 +86,7 @@ class AppRouter {
           builder: (context) => const SuccessRequestScreen(),
         );
       case Routes.editProfileScreen:
-        return MaterialPageRoute(builder: (_) => EditProfileScreen());  
+        return MaterialPageRoute(builder: (_) => EditProfileScreen());
       case Routes.notificationsScreen:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
 
@@ -92,7 +95,18 @@ class AppRouter {
 
       case Routes.searchScreen:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
-
+      case Routes.completeTechnicialProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CompleteProfileTechnicalScreen(),
+        );
+      case Routes.uploadIdTechnicialScreen:
+        return MaterialPageRoute(
+          builder: (_) =>  UploadIdTechScreen(),
+        );
+      case Routes.checkTechIdSuccessScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CheckTechIdSuccessScreen(),
+        );
       default:
         return null;
     }
