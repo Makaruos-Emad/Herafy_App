@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
+    this.textInputType,
     required this.textInputType,
     this.controller,
     this.onChanged,
@@ -17,6 +18,11 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.hintStyle,
     this.labelText,
+    this.maxLines = 1,
+  });
+
+  final String hintText;
+  final TextInputType? textInputType;
     this.enableValidation = true,
     this.validator,
   });
@@ -33,12 +39,14 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final String? labelText;
+  final int maxLines;
   final bool enableValidation;
   final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
       controller: controller,
       onChanged: onChanged,
       textDirection: textDirection,
@@ -55,17 +63,16 @@ class CustomTextFormField extends StatelessWidget {
               })
           : null,
       keyboardType: textInputType,
-      style: AppTextStyles.semiBold20Black,
+      style: AppTextStyles.regular16Black,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        hintStyle: hintStyle ?? AppTextStyles.semiBold20Black,
+        hintStyle: hintStyle ?? AppTextStyles.regular16Black,
         suffixIcon: suffixIcon,
         suffixText: suffixText,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: prefixIcon,
-        ),
+        prefixIcon: prefixIcon == null
+            ? null
+            : Padding(padding: const EdgeInsets.all(15.0), child: prefixIcon),
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),

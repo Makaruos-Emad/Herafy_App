@@ -14,6 +14,9 @@ import 'package:herafy/features/login_technical/ui/complete_profile_technical_sc
 import 'package:herafy/features/login_technical/ui/upload_id_tech_screen.dart';
 import 'package:herafy/features/notification/ui/notifications_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
+import 'package:herafy/features/requests/ui/report_problem_screen.dart';
+import 'package:herafy/features/requests/ui/request_tracker_screen.dart';
+import 'package:herafy/features/requests/ui/view_invoice_screen.dart';
 import 'package:herafy/features/profile/ui/edit_profile_screen.dart';
 import 'package:herafy/features/service_request/data/best_tech_model.dart';
 import 'package:herafy/features/service_request/logic/cubit/service_requist_cubit.dart';
@@ -95,6 +98,16 @@ class AppRouter {
 
       case Routes.searchScreen:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+
+      case Routes.invoiceDetailsScreen:
+        return MaterialPageRoute(builder: (_) => const InvoiceDetailsScreen());
+
+      case Routes.reportProblemScreen:
+        return MaterialPageRoute(builder: (_) => const ReportProblemScreen());
+
+      case Routes.requestTrackerScreen:
+        return MaterialPageRoute(builder: (_) => const RequestTrackerScreen());
+
       case Routes.completeTechnicialProfileScreen:
         return MaterialPageRoute(
           builder: (_) => const CompleteProfileTechnicalScreen(),
