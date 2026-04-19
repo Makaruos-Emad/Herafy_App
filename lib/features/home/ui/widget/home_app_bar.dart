@@ -18,7 +18,6 @@ class HomeAppBar extends StatelessWidget {
           ),
         ),
         AppBarActions(
-          onLocationPressed: () {},
           onNotificationPressed: () {
             Navigator.pushNamed(context, Routes.notificationsScreen);
           },
