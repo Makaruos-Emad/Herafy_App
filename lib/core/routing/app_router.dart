@@ -10,6 +10,9 @@ import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/home/ui/search_screen.dart';
 import 'package:herafy/features/notification/ui/notifications_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
+import 'package:herafy/features/requests/ui/report_problem_screen.dart';
+import 'package:herafy/features/requests/ui/request_tracker_screen.dart';
+import 'package:herafy/features/requests/ui/view_invoice_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -45,6 +48,15 @@ class AppRouter {
 
       case Routes.searchScreen:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+
+      case Routes.invoiceDetailsScreen:
+        return MaterialPageRoute(builder: (_) => const InvoiceDetailsScreen());
+
+      case Routes.reportProblemScreen:
+        return MaterialPageRoute(builder: (_) => const ReportProblemScreen());
+
+      case Routes.requestTrackerScreen:
+        return MaterialPageRoute(builder: (_) => const RequestTrackerScreen());
 
       default:
         return null;

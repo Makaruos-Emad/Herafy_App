@@ -9,4 +9,7 @@ class Routes {
   static const String notificationsScreen = 'notificationsScreen';
   static const String allServicesScreen = 'allServicesScreen';
   static const String searchScreen = 'searchScreen';
+  static const String invoiceDetailsScreen = 'invoiceDetailsScreen';
+  static const String reportProblemScreen = 'reportProblemScreen';
+  static const String requestTrackerScreen = 'requestTrackerScreen';
 }
