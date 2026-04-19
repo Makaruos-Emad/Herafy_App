@@ -7,7 +7,6 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.textInputType,
-    required this.textInputType,
     this.controller,
     this.onChanged,
     this.suffixIcon,
@@ -19,16 +18,12 @@ class CustomTextFormField extends StatelessWidget {
     this.hintStyle,
     this.labelText,
     this.maxLines = 1,
-  });
-
-  final String hintText;
-  final TextInputType? textInputType;
     this.enableValidation = true,
     this.validator,
   });
 
   final String hintText;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
@@ -46,24 +41,26 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxLines,
+      maxLines: obscureText ? 1 : maxLines,
       controller: controller,
       onChanged: onChanged,
       textDirection: textDirection,
       obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,
       onSaved: onSaved,
-      validator: enableValidation
-          ? (validator ??
-              (value) {
-                if (value == null || value.isEmpty) {
-                  return hintText;
-                }
-                return null;
-              })
-          : null,
       keyboardType: textInputType,
       style: AppTextStyles.regular16Black,
+
+      validator: enableValidation
+          ? (validator ??
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return hintText;
+                  }
+                  return null;
+                })
+          : null,
+
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
@@ -72,20 +69,23 @@ class CustomTextFormField extends StatelessWidget {
         suffixText: suffixText,
         prefixIcon: prefixIcon == null
             ? null
-            : Padding(padding: const EdgeInsets.all(15.0), child: prefixIcon),
+            : Padding(padding: const EdgeInsets.all(12.0), child: prefixIcon),
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
         enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        focusedBorder: buildBorder(isFocused: true),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder buildBorder({bool isFocused = false}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(width: 1, color: AppColors.primaryColor),
+      borderSide: BorderSide(
+        width: 1.2,
+        color: isFocused ? AppColors.primaryColor : Colors.grey.shade300,
+      ),
     );
   }
 }
