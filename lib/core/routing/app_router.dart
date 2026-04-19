@@ -8,6 +8,7 @@ import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
 import 'package:herafy/features/home/ui/all_services_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
+import 'package:herafy/features/home/ui/home_technician_screen.dart';
 import 'package:herafy/features/home/ui/search_screen.dart';
 import 'package:herafy/features/login_technical/ui/check_tech_id_success_screen.dart';
 import 'package:herafy/features/login_technical/ui/complete_profile_technical_screen.dart';
@@ -113,13 +114,15 @@ class AppRouter {
           builder: (_) => const CompleteProfileTechnicalScreen(),
         );
       case Routes.uploadIdTechnicialScreen:
-        return MaterialPageRoute(
-          builder: (_) =>  UploadIdTechScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => UploadIdTechScreen());
       case Routes.checkTechIdSuccessScreen:
         return MaterialPageRoute(
           builder: (_) => const CheckTechIdSuccessScreen(),
         );
+
+      case Routes.homeTechnicianScreen:
+        return MaterialPageRoute(builder: (_) => const HomeTechnicianScreen());
+
       default:
         return null;
     }
