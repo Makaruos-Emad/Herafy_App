@@ -1,129 +1,127 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
-import 'package:herafy/features/auth/models/list_contry.dart';
 
-class CustomListTitle extends StatefulWidget {
-  const CustomListTitle({
+class CustomListTitleFormField<T> extends FormField<T> {
+  CustomListTitleFormField({
     super.key,
-    required this.onCountrySelected,
-    required this.listItems,
-    required this.leadingIcon,
-    this.initialSelected,
-    this.showSelectedTitle = true,
-    this.placeholderText,
-  });
+    required List<T> items,
+    required String Function(T item) titleBuilder,
+    required ValueChanged<T> onSelected,
+    super.initialValue,
+    Widget? leading,
+    Widget? Function(T item)? leadingBuilder,
+    Widget? Function(T item)? trailingBuilder,
+    bool showSelectedTitle = true,
+    String? placeholderText,
+    super.validator,
+    AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+  }) : super(
+          builder: (FormFieldState<T> state) {
+            final selected = state.value;
 
-  final ValueChanged<Country> onCountrySelected;
-  final List<Country> listItems;
-  final Icon? leadingIcon;
-  final Country? initialSelected;
-  final bool showSelectedTitle;
-  final String? placeholderText;
+            Widget? buildLeading(T? selected) {
+              if (selected == null) return leading;
+              return leadingBuilder?.call(selected) ?? leading;
+            }
 
-  @override
-  State<CustomListTitle> createState() => _CustomListTitleState();
-}
+            final leadingWidget = buildLeading(selected);
 
-class _CustomListTitleState extends State<CustomListTitle> {
-  Country? _selected;
+            final shouldShowTitle =
+                selected == null || showSelectedTitle || leadingWidget == null;
 
-  @override
-  void initState() {
-    super.initState();
-    _selected = widget.initialSelected ??
-        (widget.placeholderText == null ? widget.listItems.first : null);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final selected = _selected;
-    final shouldShowTitle = selected == null ||
-        widget.showSelectedTitle ||
-        selected.flag == null;
-
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (_) {
-            return ListView.builder(
-              itemCount: widget.listItems.length,
-              itemBuilder: (context, index) {
-                final item = widget.listItems[index];
-                return ListTile(
-                  leading: item.flag == null
-                      ? widget.leadingIcon
-                      : Text(item.flag!, style: const TextStyle(fontSize: 20)),
-                  title: Text(item.title, style: const TextStyle(fontSize: 20)),
-                  trailing: item.code == null
-                      ? null
-                      : Text(
-                          item.code!,
-                          textDirection: TextDirection.ltr,
-                          style: const TextStyle(fontSize: 16),
-                        ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
                   onTap: () {
-                    setState(() {
-                      _selected = item;
-                    });
-                    widget.onCountrySelected(item);
-                    Navigator.pop(context);
+                    showModalBottomSheet(
+                      context: state.context,
+                      builder: (_) {
+                        return ListView.builder(
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            final item = items[index];
+                            return ListTile(
+                              leading:
+                                  leadingBuilder?.call(item) ?? leading,
+                              title: Text(
+                                titleBuilder(item),
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                              trailing: trailingBuilder?.call(item),
+                              onTap: () {
+                                state.didChange(item); // 🔥 المهم
+                                onSelected(item);
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
                   },
-                );
-              },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 14),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: state.hasError
+                            ? Colors.red
+                            : AppColors.primaryColor,
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Row(
+                      children: () {
+                        final children = <Widget>[];
+
+                        if (leadingWidget != null) {
+                          children.add(leadingWidget);
+                        }
+
+                        if (shouldShowTitle) {
+                          if (children.isNotEmpty) {
+                            children.add(const SizedBox(width: 6));
+                          }
+                          children.add(
+                            Text(
+                              selected == null
+                                  ? (placeholderText ?? "")
+                                  : titleBuilder(selected),
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: selected == null
+                                    ? Theme.of(state.context).hintColor
+                                    : null,
+                              ),
+                            ),
+                          );
+                        }
+
+                        if (children.isNotEmpty) {
+                          children.add(const SizedBox(width: 6));
+                        }
+
+                        children.add(const Icon(Icons.arrow_drop_down));
+
+                        return children;
+                      }(),
+                    ),
+                  ),
+                ),
+
+                /// 🔥 error text
+                if (state.hasError)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5, right: 5),
+                    child: Text(
+                      state.errorText!,
+                      style: const TextStyle(
+                          color: Colors.red, fontSize: 12),
+                    ),
+                  ),
+              ],
             );
           },
         );
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primaryColor),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          children: () {
-            final children = <Widget>[];
-
-            if (selected == null) {
-              if (widget.leadingIcon != null) {
-                children.add(widget.leadingIcon!);
-              }
-            } else {
-              if (selected.flag == null && widget.leadingIcon != null) {
-                children.add(widget.leadingIcon!);
-              } else if (selected.flag != null) {
-                children.add(
-                  Text(selected.flag!, style: const TextStyle(fontSize: 20)),
-                );
-              }
-            }
-
-            if (shouldShowTitle) {
-              if (children.isNotEmpty) {
-                children.add(const SizedBox(width: 6));
-              }
-              children.add(
-                Text(
-                  selected?.title ?? (widget.placeholderText ?? ""),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: selected == null ? Theme.of(context).hintColor : null,
-                  ),
-                ),
-              );
-            }
-
-            if (children.isNotEmpty) {
-              children.add(const SizedBox(width: 6));
-            }
-
-            children.add(const Icon(Icons.arrow_drop_down));
-
-            return children;
-          }(),
-        ),
-      ),
-    );
-  }
 }

@@ -3,16 +3,11 @@ import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_form_field.dart';
-import 'package:herafy/features/auth/models/list_contry.dart';
-import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
 
 class WidgetEnterNumber extends StatelessWidget {
   const WidgetEnterNumber({super.key});
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  static final ValueNotifier<Country> _selectedCountry = ValueNotifier<Country>(
-    countries[0],
-  );
   static String _phoneNumber = "";
 
   @override
@@ -24,34 +19,21 @@ class WidgetEnterNumber extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: ValueListenableBuilder<Country>(
-                  valueListenable: _selectedCountry,
-                  builder: (context, selectedCountry, _) {
-                    return CustomTextFormField(
-                      hintText: "ادخل رقم الهاتف",
-                      hintStyle: AppTextStyles.semiBold20Black,
-                      textInputType: TextInputType.number,
-                      textDirection: TextDirection.ltr,
-                      suffixText: "   \u200E${selectedCountry.code}",
-                      //\u200E دة رمز بيستخدم لتثبيت اتجاه النص من الشمال لليمين داخل سياق عربي
-                      onSaved: (phoneNumber) {
-                        _phoneNumber = phoneNumber ?? "";
-                      },
-                    );
+                child: CustomTextFormField(
+                  hintText: "ادخل رقم الهاتف",
+                  hintStyle: AppTextStyles.semiBold20Black,
+                  textInputType: TextInputType.number,
+                  textDirection: TextDirection.ltr,
+                  validator: phoneValidator,
+                  suffixText: " 20+",
+                  //\u200E دة رمز بيستخدم لتثبيت اتجاه النص من الشمال لليمين داخل سياق عربي
+                  onSaved: (phoneNumber) {
+                    _phoneNumber = phoneNumber ?? "";
                   },
                 ),
               ),
 
               const SizedBox(width: 8),
-              CustomListTitle(
-                listItems: countries,
-                leadingIcon: null,
-                initialSelected: _selectedCountry.value,
-                showSelectedTitle: false,
-                onCountrySelected: (country) {
-                  _selectedCountry.value = country;
-                },
-              ),
             ],
           ),
           SizedBox(height: 50),
@@ -74,4 +56,31 @@ class WidgetEnterNumber extends StatelessWidget {
       ),
     );
   }
+}
+
+
+String? phoneValidator(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return "من فضلك ادخل رقم الموبايل";
+  }
+
+  final phone = value.trim();
+
+  // لازم يكون أرقام فقط
+  final isDigitsOnly = RegExp(r'^[0-9]+$').hasMatch(phone);
+  if (!isDigitsOnly) {
+    return "رقم الموبايل لازم يكون أرقام فقط";
+  }
+
+  // لازم 11 رقم
+  if (phone.length != 11) {
+    return "رقم الموبايل لازم يكون 11 رقم";
+  }
+
+  // لازم يبدأ بـ 01
+  if (!phone.startsWith("01")) {
+    return "رقم الموبايل لازم يبدأ بـ 01";
+  }
+
+  return null;
 }

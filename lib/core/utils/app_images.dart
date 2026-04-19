@@ -6,6 +6,10 @@ class Assets {
   /// assets/images/allow_location.svg
   static const String imagesAllowLocation = "assets/images/allow_location.svg";
 
+  /// Assets for imagesBestTech
+  /// assets/images/best_tech.png
+  static const String imagesBestTech = "assets/images/best_tech.png";
+
   /// Assets for imagesBottomNavigatoinBarIconsChat
   /// assets/images/bottom_navigatoin_bar_icons/chat.svg
   static const String imagesBottomNavigatoinBarIconsChat = "assets/images/bottom_navigatoin_bar_icons/chat.svg";
@@ -73,6 +77,10 @@ class Assets {
   /// Assets for imagesSearchIcon
   /// assets/images/search_icon.svg
   static const String imagesSearchIcon = "assets/images/search_icon.svg";
+
+  /// Assets for imagesSeccessfulPng
+  /// assets/images/seccessful_png.png
+  static const String imagesSeccessfulPng = "assets/images/seccessful_png.png";
 
   /// Assets for imagesSelectClient
   /// assets/images/select_client.png
