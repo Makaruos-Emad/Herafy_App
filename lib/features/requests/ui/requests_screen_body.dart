@@ -20,7 +20,7 @@ class RequestsScreenBody extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              const RequestTabs(),
+              const RequestTabs(tabs: ["الحالية", "السابقة"]),
 
               const SizedBox(height: 10),
 
