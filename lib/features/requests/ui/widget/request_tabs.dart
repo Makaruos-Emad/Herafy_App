@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 
 class RequestTabs extends StatelessWidget {
-  const RequestTabs({super.key});
-
+  const RequestTabs({super.key, required this.tabs});
+  final List<String> tabs;
   @override
   Widget build(BuildContext context) {
     return TabBar(
@@ -15,10 +15,7 @@ class RequestTabs extends StatelessWidget {
       labelColor: AppColors.white,
       unselectedLabelColor: AppColors.black,
       dividerColor: Colors.transparent,
-      tabs: const [
-        Tab(text: "الحالية"),
-        Tab(text: "السابقة"),
-      ],
+      tabs: tabs.map((tab) => Tab(text: tab)).toList(),
     );
   }
 }
