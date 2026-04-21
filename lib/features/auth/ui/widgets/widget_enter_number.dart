@@ -58,7 +58,6 @@ class WidgetEnterNumber extends StatelessWidget {
   }
 }
 
-
 String? phoneValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
     return "من فضلك ادخل رقم الموبايل";

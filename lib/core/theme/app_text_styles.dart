@@ -54,6 +54,25 @@ class AppTextStyles {
     color: AppColors.white,
   );
 
+  static const TextStyle regular14White = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 14,
+    color: AppColors.white,
+  );
+
+  static const TextStyle regular16White = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.regular,
+    fontSize: 16,
+    color: AppColors.white,
+  );
+  static const TextStyle bold32White = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 32,
+    color: AppColors.white,
+  );
   static const TextStyle semiBold20Black = TextStyle(
     fontFamily: fontFamily,
     fontWeight: FontWeightHelper.semiBold,

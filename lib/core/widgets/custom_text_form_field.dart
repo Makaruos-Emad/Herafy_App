@@ -6,7 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.hintText,
-    required this.textInputType,
+    this.textInputType,
     this.controller,
     this.onChanged,
     this.suffixIcon,
@@ -17,12 +17,13 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.hintStyle,
     this.labelText,
+    this.maxLines = 1,
     this.enableValidation = true,
     this.validator,
   });
 
   final String hintText;
-  final TextInputType textInputType;
+  final TextInputType? textInputType;
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
@@ -33,52 +34,58 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final String? labelText;
+  final int maxLines;
   final bool enableValidation;
   final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: obscureText ? 1 : maxLines,
       controller: controller,
       onChanged: onChanged,
       textDirection: textDirection,
       obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,
       onSaved: onSaved,
+      keyboardType: textInputType,
+      style: AppTextStyles.regular16Black,
+
       validator: enableValidation
           ? (validator ??
-              (value) {
-                if (value == null || value.isEmpty) {
-                  return hintText;
-                }
-                return null;
-              })
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return hintText;
+                  }
+                  return null;
+                })
           : null,
-      keyboardType: textInputType,
-      style: AppTextStyles.semiBold20Black,
+
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        hintStyle: hintStyle ?? AppTextStyles.semiBold20Black,
+        hintStyle: hintStyle ?? AppTextStyles.regular16Black,
         suffixIcon: suffixIcon,
         suffixText: suffixText,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: prefixIcon,
-        ),
+        prefixIcon: prefixIcon == null
+            ? null
+            : Padding(padding: const EdgeInsets.all(12.0), child: prefixIcon),
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
         enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        focusedBorder: buildBorder(isFocused: true),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder buildBorder({bool isFocused = false}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(width: 1, color: AppColors.primaryColor),
+      borderSide: BorderSide(
+        width: 1.2,
+        color: isFocused ? AppColors.primaryColor : Colors.grey.shade300,
+      ),
     );
   }
 }
