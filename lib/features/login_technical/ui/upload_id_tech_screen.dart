@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
@@ -90,8 +91,9 @@ class _UploadIdTechScreenState extends State<UploadIdTechScreen> {
                       SizedBox(height: height * 0.03),
 
                       AddIdProfileTechWidget(
-                        height: height * 0.5,
+                        height: height * 0.25,
                         title: "الوجه الأمامي للبطاقة\nاضغط هنا",
+                        icon: FontAwesomeIcons.cloudArrowUp,
                         onImageSelected: (file) {
                           setState(() => frontImage = file);
                         },
@@ -100,8 +102,9 @@ class _UploadIdTechScreenState extends State<UploadIdTechScreen> {
                       SizedBox(height: height * 0.02),
 
                       AddIdProfileTechWidget(
-                        height: height * 0.5,
+                        height: height * 0.25,
                         title: "الوجه الخلفي للبطاقة\nاضغط هنا",
+                        icon: FontAwesomeIcons.cloudArrowUp,
                         onImageSelected: (file) {
                           setState(() => backImage = file);
                         },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/widgets/custom_app_bar.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/features/technical_task/widget/task_details_body.dart';
@@ -20,7 +21,12 @@ class TaskDetailsScreen extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(height * 0.01),
-          child: CustomButton(onPressed: () {}, text: "بدء العمل"),
+          child: CustomButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.finishTaskScreen);
+            },
+            text: "بدء العمل",
+          ),
         ),
       ),
       body: TaskDetailsbody(height: height, width: width),
