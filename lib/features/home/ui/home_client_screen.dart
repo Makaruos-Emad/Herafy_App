@@ -17,7 +17,7 @@ class HomeClientScreen extends StatelessWidget {
       const HomeClientScreenBody(),
       const RequestsScreenBody(),
       const ChatScreenBody(),
-      const ProfileScreenBody(),
+      const ProfileScreenBody(accepteRequest: false),
     ];
 
     return BlocProvider(

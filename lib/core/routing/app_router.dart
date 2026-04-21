@@ -23,6 +23,8 @@ import 'package:herafy/features/service_request/ui/check_request_screen.dart';
 import 'package:herafy/features/service_request/ui/select_technician_screen.dart';
 import 'package:herafy/features/service_request/ui/success_request_screen.dart';
 import 'package:herafy/features/service_request/ui/tech_selected_profile_screen.dart';
+import 'package:herafy/features/technical_task/ui/closed_task_back_home_screen.dart';
+import 'package:herafy/features/technical_task/ui/finish_task_from_tech_screen.dart';
 import 'package:herafy/features/technical_task/ui/task_details_screnn.dart';
 
 class AppRouter {
@@ -106,9 +108,15 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CheckTechIdSuccessScreen(),
         );
-
       case Routes.taskDetailsScreen:
         return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
+      case Routes.finishTaskScreen:
+        return MaterialPageRoute(builder: (_) => FinishTaskFromTechScreen());
+      case Routes.closedTaskBackHomeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ClosedTaskBackHomeScreen(),
+        );
+
       default:
         return null;
     }
