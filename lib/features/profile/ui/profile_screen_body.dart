@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:herafy/core/routing/routes.dart';
-import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
+import 'package:herafy/features/profile/widgets/turn_on_off_buttom.dart';
 
 class ProfileScreenBody extends StatelessWidget {
-  const ProfileScreenBody({super.key});
-
+  const ProfileScreenBody({super.key, required this.accepteRequest});
+  final bool accepteRequest;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class ProfileScreenBody extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    BuildItem(
+                    BuildButtomTurnOnOffItem(
                       title: "تعديل البيانات",
                       icon: Icons.person,
                       onTap: () {
@@ -71,12 +71,31 @@ class ProfileScreenBody extends StatelessWidget {
                       },
                     ),
                     Divider(),
-                    BuildItem(
+                    BuildButtomTurnOnOffItem(
                       title: "الاشعارات",
                       icon: Icons.notifications,
-                      buttom: const ToggleButton(),
+                      buttom: ToggleButton(
+                        onChanged: (value) {
+                          print(value);
+                        },
+                      ),
                       onTap: () {},
                     ),
+                    if (accepteRequest) ...[
+                      SizedBox(height: 10),
+                      Divider(),
+                      BuildButtomTurnOnOffItem(
+                        title: "استقبال الطلبات",
+                        icon: Icons.construction,
+                        buttom: ToggleButton(
+                          onChanged: (value) {
+                            print(value);
+                          },
+                        ),
+                        onTap: () {},
+                      ),
+                    ],
+
                     SizedBox(height: 10),
                   ],
                 ),
@@ -94,7 +113,7 @@ class ProfileScreenBody extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: BuildItem(
+                child: BuildButtomTurnOnOffItem(
                   title: "المساعدة",
                   icon: Icons.headset_mic,
                   iconColor: Colors.red,
@@ -104,97 +123,6 @@ class ProfileScreenBody extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class BuildItem extends StatelessWidget {
-  const BuildItem({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.onTap,
-    this.buttom,
-    this.backgroundIconColor,
-    this.iconColor,
-  });
-  final String title;
-  final IconData icon;
-  final void Function() onTap;
-  final Widget? buttom;
-  final Color? backgroundIconColor;
-  final Color? iconColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Row(
-            spacing: 10,
-            children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: backgroundIconColor ?? AppColors.primaryColor,
-                child: Icon(icon, color: iconColor ?? Colors.white),
-              ),
-              Text(title, style: AppTextStyles.semiBold20Black),
-              Spacer(),
-              buttom != null
-                  ? buttom!
-                  : Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.primaryColor,
-                    ),
-            ],
-          ),
-          SizedBox(width: 10),
-        ],
-      ),
-    );
-  }
-}
-
-class ToggleButton extends StatefulWidget {
-  const ToggleButton({super.key});
-
-  @override
-  State<ToggleButton> createState() => _ToggleButtonState();
-}
-
-class _ToggleButtonState extends State<ToggleButton> {
-  bool isActive = false; // حالة الزرار
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isActive = !isActive; // تغيير الحالة
-        });
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        width: 70,
-        height: 35,
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: isActive ? Colors.blue : Colors.grey[400],
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Align(
-          alignment: isActive ? Alignment.centerRight : Alignment.centerLeft,
-          child: Container(
-            width: 25,
-            height: 25,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-          ),
         ),
       ),
     );

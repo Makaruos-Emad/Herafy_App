@@ -23,5 +23,8 @@ class Routes {
       'completeTechnicialProfileScreen';
   static const String uploadIdTechnicialScreen = 'uploadIdTechnicialScreen';
   static const String checkTechIdSuccessScreen = 'checkTechIdSuccessScreen';
+  static const String taskDetailsScreen = 'taskDetailsScreen';
+  static const String finishTaskScreen = 'finishTaskScreen';
+  static const String closedTaskBackHomeScreen = 'closedTaskBackHomeScreen';
   static const String homeTechnicianScreen = 'homeTechnicianScreen';
 }

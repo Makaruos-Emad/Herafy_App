@@ -10,6 +10,7 @@ class AddIdProfileTechWidget extends StatefulWidget {
   final Function(File)? onImageSelected;
   final double? height;
   final double? width;
+  final FaIconData icon;
 
   const AddIdProfileTechWidget({
     super.key,
@@ -17,6 +18,7 @@ class AddIdProfileTechWidget extends StatefulWidget {
     this.onImageSelected,
     this.height,
     this.width,
+    required this.icon,
   });
 
   @override
@@ -77,7 +79,7 @@ class _AddIdProfileTechWidgetState extends State<AddIdProfileTechWidget> {
     return GestureDetector(
       onTap: showImageSource,
       child: BaseCard(
-        height: 250,
+        height: widget.height,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Stack(
@@ -98,7 +100,7 @@ class _AddIdProfileTechWidgetState extends State<AddIdProfileTechWidget> {
                             radius: 40,
                             backgroundColor: AppColors.primaryColor,
                             child: FaIcon(
-                              FontAwesomeIcons.cloudArrowUp,
+                              widget.icon,
                               size: 40,
                               color: Colors.white,
                             ),
