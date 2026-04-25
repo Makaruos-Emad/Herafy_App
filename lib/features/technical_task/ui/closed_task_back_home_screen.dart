@@ -19,8 +19,7 @@ class ClosedTaskBackHomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                Routes.homeClientScreen,
-                //هنا المفروض تحط الهوم بتاعت الفنيي
+                Routes.homeTechnicianScreen,
                 (route) => false,
               );
             },

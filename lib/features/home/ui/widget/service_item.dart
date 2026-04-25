@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/features/home/model/service_model.dart';
@@ -10,22 +11,27 @@ class ServiceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 84,
-          width: 88,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: AppColors.primaryColor,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Routes.selectTechnicianScreen);
+      },
+      child: Column(
+        children: [
+          Container(
+            height: 84,
+            width: 88,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.primaryColor,
+            ),
+            child: const Icon(Icons.home_repair_service),
           ),
-          child: const Icon(Icons.home_repair_service),
-        ),
 
-        const SizedBox(height: 4),
+          const SizedBox(height: 4),
 
-        Text(service.title, style: AppTextStyles.regular12Black),
-      ],
+          Text(service.title, style: AppTextStyles.regular12Black),
+        ],
+      ),
     );
   }
 }

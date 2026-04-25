@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/widgets/custom_app_bar.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/features/login_technical/widget/check_tech_id_success_body.dart';
@@ -20,7 +21,12 @@ class CheckTechIdSuccessScreen extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(height * 0.01),
-          child: CustomButton(onPressed: () {}, text: "تواصل مع الدعم الفني"),
+          child: CustomButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.reportProblemScreen);
+            },
+            text: "تواصل مع الدعم الفني",
+          ),
         ),
       ),
       body: CheckTechIdSuccessBody(height: height),

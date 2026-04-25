@@ -35,55 +35,55 @@ class CheckRequestScreen extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ProviderCard(width: width),
-                    const SizedBox(height: 10),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ProviderCard(width: width),
+                      const SizedBox(height: 10),
 
-                    ServiceDetailsCard(
-                      width: width,
-                      height: height,
-                      formattedDate: formattedDate,
-                      formattedTime: formattedTime,
-                      address: address,
-                      governorate: governorate,
-                      center: center,
-                    ),
-                  ],
+                      ServiceDetailsCard(
+                        width: width,
+                        height: height,
+                        formattedDate: formattedDate,
+                        formattedTime: formattedTime,
+                        address: address,
+                        governorate: governorate,
+                        center: center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            CustomButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.successRequestScreen);
-              },
-              text: "تأكيد الطلب",
-            ),
+              CustomButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.successRequestScreen);
+                },
+                text: "تأكيد الطلب",
+              ),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            CustomButton(
-              onPressed: () {},
-              text: "الغاء",
-              backgroundColor: Colors.white,
-              textStyle: AppTextStyles.regular16PrimaryColor,
-            ),
-          ],
+              CustomButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                text: "الغاء",
+                backgroundColor: Colors.white,
+                textStyle: AppTextStyles.regular16PrimaryColor,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-

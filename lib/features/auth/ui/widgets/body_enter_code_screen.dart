@@ -8,7 +8,6 @@ import 'package:herafy/features/auth/ui/widgets/custom_pin_put_code.dart';
 class BodyEnterCodeScreen extends StatefulWidget {
   const BodyEnterCodeScreen({super.key, required this.phoneNumber});
   final String? phoneNumber;
-
   @override
   State<BodyEnterCodeScreen> createState() => _BodyEnterCodeScreenState();
 }
@@ -66,10 +65,7 @@ class _BodyEnterCodeScreenState extends State<BodyEnterCodeScreen> {
                 onPressed: () {
                   if (fromKey.currentState!.validate()) {
                     print("success");
-                    Navigator.pushNamed(
-                      context,
-                      Routes.userTypeSelectionScreen,
-                    );
+                    Navigator.pushNamed(context, navigateRoute(false));
                   }
                 },
                 text: 'تأكيد',
@@ -79,5 +75,13 @@ class _BodyEnterCodeScreenState extends State<BodyEnterCodeScreen> {
         ),
       ),
     );
+  }
+}
+
+String navigateRoute(bool isUser) {
+  if (isUser) {
+    return Routes.completeProfileScreen;
+  } else {
+    return Routes.completeTechnicialProfileScreen;
   }
 }

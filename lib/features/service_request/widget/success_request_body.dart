@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_colors.dart';
@@ -42,14 +41,17 @@ class SuccessRequestScreenBody extends StatelessWidget {
                 style: AppTextStyles.regular16GrayBlue,
               ),
               const Spacer(),
-              CustomButton(onPressed: () {
-                //هنا تحط صفحة الطلبات واللي موجوده برضو في الاسكرين بتاعت الهوم من تحت 
-              }, text: "تتبع الطلب"),
+              CustomButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.requestTrackerScreen);
+                },
+                text: "تتبع الطلب",
+              ),
               CustomButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    Routes.homeClientScreen, // اسم الشاشة اللي رايح لها
+                    Routes.homeClientScreen,
                     (route) => false,
                   );
                 },

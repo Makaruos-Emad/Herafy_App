@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/widgets/custom_app_bar.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
@@ -29,12 +28,7 @@ class RequestTrackerScreen extends StatelessWidget {
               const SizedBox(height: 24),
               TechnicianCard(),
               const SizedBox(height: 24),
-              CustomButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.reportProblemScreen);
-                },
-                text: "مراسلة",
-              ),
+              CustomButton(onPressed: () {}, text: "مراسلة"),
               const SizedBox(height: 16),
               CustomOutlinedButton(
                 onPressed: () {

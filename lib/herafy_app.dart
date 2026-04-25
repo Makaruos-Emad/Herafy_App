@@ -41,7 +41,7 @@ String navigateToInitialRoute() {
   bool isOnboardingSeen = Prefs.getBool(kIsOnboardingSeen);
 
   if (isOnboardingSeen) {
-    return Routes.loginNumberScreen;
+    return Routes.userTypeSelectionScreen;
   } else {
     return Routes.onboardingScreen;
   }
