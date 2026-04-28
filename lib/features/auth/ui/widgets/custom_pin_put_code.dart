@@ -4,7 +4,8 @@ import 'package:herafy/core/theme/app_colors.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomPinPut extends StatelessWidget {
-  const CustomPinPut({super.key});
+  const CustomPinPut({super.key, this.onCompleted});
+  final void Function(String)? onCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +41,7 @@ class CustomPinPut extends StatelessWidget {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.phone,
       separatorBuilder: (index) => const SizedBox(width: 20),
-      onCompleted: (value) {
-        print(value);
-      },
+      onCompleted: onCompleted,
     );
   }
 }

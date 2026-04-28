@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/routing/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
+import 'package:herafy/features/auth/cubit/auth_cubit/auth_cubit.dart';
 import 'package:herafy/features/auth/ui/widgets/user_type_select_item.dart';
 
-enum UserType { technician, client }
 
 class UserTypeSelectionBody extends StatefulWidget {
   const UserTypeSelectionBody({super.key});
@@ -63,7 +63,7 @@ class _UserTypeSelectionBodyState extends State<UserTypeSelectionBody> {
             onPressed: _selectedUserType == null
                 ? null
                 : () {
-                    Navigator.pushNamed(context, Routes.loginNumberScreen);
+                    context.read<AuthCubit>().selectUserType(_selectedUserType!);
                   },
             text: "التالي",
           ),

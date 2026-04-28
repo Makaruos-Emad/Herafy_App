@@ -55,6 +55,7 @@ dependencies:
   readmore: ^3.0.0
   # for maps screen
   geocoding: ^4.0.0
+  bloc: ^9.2.0
   
 
 dev_dependencies:
