@@ -15,45 +15,42 @@ class AllowLocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "", onpress: () {Navigator.pop(context);}),
-      body: Padding(
-        padding: const EdgeInsets.all(kHorizontalPadding),
-        child: Column(
-          children: [
-            SvgPicture.asset(Assets.imagesAllowLocation),
-            Text(
-              "تفعيل الموقع الجغرافي",
-              style: AppTextStyles.bold24DarkBlue,
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "عشان نقدر نوصلك بأقرب فني ليك في أسرع وقت، من فضلك اسمح للتطبيق بتحديد موقعك الحالي بدقة.",
-              style: AppTextStyles.regular16GrayBlue,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 30),
-            CustomButton(
-              onPressed: () {
-                getLocation();
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.homeClientScreen,
-                  (route) => false,
-                );
-              },
-              text: "السماح بالوصول للموقع",
-            ),
-            SizedBox(height: 20),
-            CustomButton(
-              onPressed: () {},
-              text: "تخطي الآن",
-              backgroundColor: Colors.white,
-              side: const BorderSide(color: AppColors.primaryColor),
-              textStyle: AppTextStyles.semiBold16White.copyWith(
-                color: AppColors.primaryColor,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: "",
+                onpress: () {
+                  Navigator.pop(context);
+                },
               ),
-            ),
-          ],
+              SvgPicture.asset(Assets.imagesAllowLocation),
+              Text(
+                "تفعيل الموقع الجغرافي",
+                style: AppTextStyles.bold24DarkBlue,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "عشان نقدر نوصلك بأقرب فني ليك في أسرع وقت، من فضلك اسمح للتطبيق بتحديد موقعك الحالي بدقة.",
+                style: AppTextStyles.regular16GrayBlue,
+                textAlign: TextAlign.center,
+              ),
+              Spacer(),
+              CustomButton(
+                onPressed: () {
+                  getLocation();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.homeClientScreen,
+                    (route) => false,
+                  );
+                },
+                text: "السماح بالوصول للموقع",
+              ),
+            ],
+          ),
         ),
       ),
     );

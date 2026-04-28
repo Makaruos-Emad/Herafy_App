@@ -8,7 +8,12 @@ class SelectTechnicianScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "أفضل السباكين"),
+      appBar: CustomAppBar(
+        title: "أفضل السباكين",
+        onpress: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SelectTechnicialBody(),
     );
   }

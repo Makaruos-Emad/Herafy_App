@@ -14,7 +14,7 @@ class UserTypeSelectionScreen extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      body: UserTypeSelectionBody()
+      body: SafeArea(child: UserTypeSelectionBody()),
     );
   }
 }

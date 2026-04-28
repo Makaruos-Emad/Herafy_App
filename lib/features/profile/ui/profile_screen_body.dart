@@ -20,7 +20,7 @@ class ProfileScreenBody extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              Routes.loginNumberScreen,
+              Routes.userTypeSelectionScreen,
               (route) => false,
             );
           },
@@ -118,7 +118,9 @@ class ProfileScreenBody extends StatelessWidget {
                   icon: Icons.headset_mic,
                   iconColor: Colors.red,
                   backgroundIconColor: const Color.fromARGB(255, 230, 200, 210),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.reportProblemScreen);
+                  },
                 ),
               ),
             ),

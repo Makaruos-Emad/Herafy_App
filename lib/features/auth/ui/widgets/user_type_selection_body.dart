@@ -63,7 +63,7 @@ class _UserTypeSelectionBodyState extends State<UserTypeSelectionBody> {
             onPressed: _selectedUserType == null
                 ? null
                 : () {
-                    Navigator.pushNamed(context, Routes.completeProfileScreen);
+                    Navigator.pushNamed(context, Routes.loginNumberScreen);
                   },
             text: "التالي",
           ),

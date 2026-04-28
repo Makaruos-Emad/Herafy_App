@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
@@ -70,7 +71,12 @@ class NewTechnicianRequestsItem extends StatelessWidget {
         ),
 
         const SizedBox(height: 16),
-        CustomButton(text: "عرض التفاصيل", onPressed: () {}),
+        CustomButton(
+          text: "عرض التفاصيل",
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.taskDetailsScreen);
+          },
+        ),
         const SizedBox(height: 16),
       ],
     );
