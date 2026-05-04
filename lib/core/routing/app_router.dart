@@ -41,9 +41,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginNumberScreen());
 
       case Routes.enterCodeScreen:
-        final phoneNumber = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => EnterCodeScreen(phoneNumber: phoneNumber),
+          builder: (_) => EnterCodeScreen(),
         );
       case Routes.userTypeSelectionScreen:
         return MaterialPageRoute(builder: (_) => UserTypeSelectionScreen());

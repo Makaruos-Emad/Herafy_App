@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/routing/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_form_field.dart';
+import 'package:herafy/features/auth/cubit/auth_cubit/auth_cubit.dart';
 
 class WidgetEnterNumber extends StatelessWidget {
   const WidgetEnterNumber({super.key});
@@ -43,11 +44,7 @@ class WidgetEnterNumber extends StatelessWidget {
                 _formKey.currentState!
                     .save(); //دي مهمة ف حتة لما ادوس  ارسال الكود بيروح واخد القيمة اللي انا كتبهتا
                 print(_phoneNumber);
-                Navigator.pushNamed(
-                  context,
-                  Routes.enterCodeScreen,
-                  arguments: _phoneNumber,
-                );
+                context.read<AuthCubit>().submitPhone(_phoneNumber);
               }
             },
             text: 'أرسال الكود',

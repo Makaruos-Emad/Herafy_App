@@ -41,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enableInteractiveSelection: false,
       maxLines: obscureText ? 1 : maxLines,
       controller: controller,
       onChanged: onChanged,
@@ -49,7 +50,7 @@ class CustomTextFormField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.center,
       onSaved: onSaved,
       keyboardType: textInputType,
-      style: AppTextStyles.regular16Black,
+      style: AppTextStyles.semiBold20Black,
 
       validator: enableValidation
           ? (validator ??
