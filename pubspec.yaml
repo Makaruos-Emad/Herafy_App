@@ -56,6 +56,8 @@ dependencies:
   # for maps screen
   geocoding: ^4.0.0
   bloc: ^9.2.0
+  dio: ^5.9.2
+  equatable: ^2.0.8
   
 
 dev_dependencies:
