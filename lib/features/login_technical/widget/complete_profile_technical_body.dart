@@ -64,7 +64,9 @@ class _BodyCompleteTechnicalProfileScreenState
                   textDirection: TextDirection.rtl,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AddImageProfileWidget(),
+                    AddImageProfileWidget(
+                      onImageSelected: (p0) {},
+                    ),
                     SizedBox(height: 30),
                     Text(
                       "الاسم بالكامل",

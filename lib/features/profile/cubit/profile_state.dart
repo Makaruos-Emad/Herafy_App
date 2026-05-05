@@ -26,3 +26,4 @@ class ProfileError extends ProfileState {
   @override
   List<Object?> get props => [error];
 }
+class ProfileImagePicked extends ProfileState {}
