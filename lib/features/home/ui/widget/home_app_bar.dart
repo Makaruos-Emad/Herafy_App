@@ -11,12 +11,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
-          child: UserInfo(
-            name: 'مكاريوس عماد',
-            userImage: Assets.imagesUserImage,
-          ),
-        ),
+        const Expanded(child: UserInfo()),
         AppBarActions(
           onNotificationPressed: () {
             Navigator.pushNamed(context, Routes.notificationsScreen);
