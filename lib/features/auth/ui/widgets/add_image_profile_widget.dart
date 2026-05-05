@@ -5,7 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AddImageProfileWidget extends StatefulWidget {
-  const AddImageProfileWidget({super.key});
+  const AddImageProfileWidget({super.key, this.imageUrl ,required this.onImageSelected});
+  final String? imageUrl;
+  final Function(File?) onImageSelected;
 
   @override
   State<AddImageProfileWidget> createState() => _AddImageProfileWidgetState();
@@ -22,6 +24,8 @@ class _AddImageProfileWidgetState extends State<AddImageProfileWidget> {
       setState(() {
         selectedImage = File(image.path);
       });
+
+      widget.onImageSelected(selectedImage);
     }
   }
 
@@ -68,7 +72,10 @@ class _AddImageProfileWidgetState extends State<AddImageProfileWidget> {
               radius: 84,
               backgroundImage: selectedImage != null
                   ? FileImage(selectedImage!)
-                  : AssetImage(Assets.imagesNoImage),
+                  : (widget.imageUrl != null && widget.imageUrl!.isNotEmpty
+                            ? NetworkImage(widget.imageUrl!)
+                            : const AssetImage(Assets.imagesNoImage))
+                        as ImageProvider,
             ),
           ),
 

@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines = 1,
     this.enableValidation = true,
     this.validator,
+    this.initialValue,
   });
 
   final String hintText;
@@ -37,10 +38,12 @@ class CustomTextFormField extends StatelessWidget {
   final int maxLines;
   final bool enableValidation;
   final String? Function(String?)? validator;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       enableInteractiveSelection: false,
       maxLines: obscureText ? 1 : maxLines,
       controller: controller,
