@@ -14,8 +14,8 @@ class AllServicesItems {
       AllServicesItemModel(title: 'نقاشة', icon: Icons.format_paint_outlined),
       AllServicesItemModel(title: 'تكييف', icon: Icons.ac_unit_outlined),
       AllServicesItemModel(
-        title: 'نظافة',
-        icon: Icons.cleaning_services_outlined,
+        title: 'تركيب سيراميك',
+        icon: Icons.grid_view,
       ),
       AllServicesItemModel(title: 'أسقف جبس', icon: Icons.layers_outlined),
     ];
