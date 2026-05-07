@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/features/home/data/all_services_items.dart';
 import 'package:herafy/features/home/ui/widget/all_service_item.dart';
-import 'package:herafy/features/home/ui/widget/service_item.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
