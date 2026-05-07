@@ -90,6 +90,18 @@ class Assets {
   /// assets/images/select_tech.png
   static const String imagesSelectTech = "assets/images/select_tech.png";
 
+  /// Assets for imagesShowOne
+  /// assets/images/show_one.png
+  static const String imagesShowOne = "assets/images/show_one.png";
+
+  /// Assets for imagesShowThree
+  /// assets/images/show_three.png
+  static const String imagesShowThree = "assets/images/show_three.png";
+
+  /// Assets for imagesShowTwo
+  /// assets/images/show_two.png
+  static const String imagesShowTwo = "assets/images/show_two.png";
+
   /// Assets for imagesUserImage
   /// assets/images/user_image.jpeg
   static const String imagesUserImage = "assets/images/user_image.jpeg";
