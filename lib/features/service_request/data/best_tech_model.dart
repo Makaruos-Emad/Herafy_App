@@ -1,13 +1,15 @@
 class BestTechnicalModel {
+  String id;
   String name;
   String description;
   String image;
   double rating;
   int distance;
-  int workingPrice;
+  double workingPrice;
   bool isAvailable;
 
   BestTechnicalModel({
+    required this.id,
     required this.name,
     required this.image,
     required this.rating,
@@ -16,142 +18,28 @@ class BestTechnicalModel {
     required this.workingPrice,
     required this.isAvailable,
   });
-}
 
-List<BestTechnicalModel> bestTechnicals = [
-  BestTechnicalModel(
-    name: "أحمد محمد",
-    description: "فني كهرباء متخصص في الأعطال المنزلية",
-    image: "",
-    rating: 4.8,
-    distance: 2,
-    workingPrice: 150,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "محمود علي",
-    description: "سباك محترف خبرة 10 سنين",
-    image: "",
-    rating: 4.6,
-    distance: 5,
-    workingPrice: 120,
-    isAvailable: false,
-  ),
-  BestTechnicalModel(
-    name: "محمد حسن",
-    description: "فني تكييفات وصيانة",
-    image: "",
-    rating: 4.9,
-    distance: 3,
-    workingPrice: 200,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "عبدالله خالد",
-    description: "نجار أبواب وشبابيك",
-    image: "",
-    rating: 4.5,
-    distance: 4,
-    workingPrice: 180,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "يوسف إبراهيم",
-    description: "فني دهانات وتشطيبات",
-    image: "",
-    rating: 4.7,
-    distance: 6,
-    workingPrice: 170,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "حسام الدين",
-    description: "فني سيراميك وبلاط",
-    image: "",
-    rating: 4.4,
-    distance: 7,
-    workingPrice: 140,
-    isAvailable: false,
-  ),
-  BestTechnicalModel(
-    name: "إبراهيم أحمد",
-    description: "فني صيانة غسالات وثلاجات",
-    image: "",
-    rating: 4.8,
-    distance: 3,
-    workingPrice: 160,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "كريم عادل",
-    description: "فني كاميرات مراقبة",
-    image: "",
-    rating: 4.6,
-    distance: 2,
-    workingPrice: 220,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "أحمد سامي",
-    description: "فني دش وتركيب قنوات",
-    image: "",
-    rating: 4.3,
-    distance: 5,
-    workingPrice: 100,
-    isAvailable: false,
-  ),
-  BestTechnicalModel(
-    name: "رامي فؤاد",
-    description: "فني شبكات وإنترنت",
-    image: "",
-    rating: 4.9,
-    distance: 1,
-    workingPrice: 250,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "سيد مصطفى",
-    description: "فني حدادة وأعمال معدنية",
-    image: "",
-    rating: 4.2,
-    distance: 8,
-    workingPrice: 190,
-    isAvailable: false,
-  ),
-  BestTechnicalModel(
-    name: "علي حسين",
-    description: "فني أجهزة كهربائية منزلية",
-    image: "",
-    rating: 4.7,
-    distance: 4,
-    workingPrice: 130,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "مصطفى جابر",
-    description: "فني تركيب مطابخ",
-    image: "",
-    rating: 4.5,
-    distance: 6,
-    workingPrice: 210,
-    isAvailable: true,
-  ),
-  BestTechnicalModel(
-    name: "خالد يوسف",
-    description: "فني جبس بورد وديكور",
-    image: "",
-    rating: 4.8,
-    distance: 3,
-    workingPrice: 230,
-    isAvailable: false,
-  ),
-  BestTechnicalModel(
-    name: "طارق محمود",
-    description: "فني صيانة أجهزة التبريد",
-    image: "",
-    rating: 4.6,
-    distance: 2,
-    workingPrice: 180,
-    isAvailable: true,
-  ),
-];
+  factory BestTechnicalModel.fromJson(Map<String, dynamic> json) {
+    return BestTechnicalModel(
+      id: json["userId"] ?? "",
+      name: json["fullname"] ?? "",
+      description: json["bio"] ?? "",
+      image: json["profileImageURL"] ?? "",
+
+      // 👇 نخليها دايمًا double
+      rating: (json["ratingAvg"] is int)
+          ? (json["ratingAvg"] as int).toDouble()
+          : (json["ratingAvg"] ?? 0.0),
+
+      // 👇 نخليها int
+      //لاحظ انه مش جاي المسافة 
+      distance: json["distance"] ?? 0,
+
+      workingPrice: json["inspectedPrice"] ?? 0,
+
+      // 👇 نحول لأي حاجة bool
+      isAvailable: json["availabilityStatus"] ?? true ,
+    );
+  }
+
+}

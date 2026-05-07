@@ -13,7 +13,7 @@ class ServiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.selectTechnicianScreen);
+        Navigator.pushNamed(context, Routes.selectTechnicianScreen ,arguments: service.id);
       },
       child: Column(
         children: [

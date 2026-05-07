@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 
@@ -8,10 +7,12 @@ class InformationWorkWidget extends StatelessWidget {
     required this.text,
     required this.icon,
     required this.iconColor,
+
   });
   final String text;
   final IconData icon;
   final Color iconColor;
+
 
   @override
   Widget build(BuildContext context) {

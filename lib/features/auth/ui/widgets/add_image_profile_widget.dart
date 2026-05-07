@@ -5,7 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AddImageProfileWidget extends StatefulWidget {
-  const AddImageProfileWidget({super.key, this.imageUrl ,required this.onImageSelected});
+  const AddImageProfileWidget(
+      {super.key, this.imageUrl, required this.onImageSelected});
   final String? imageUrl;
   final Function(File?) onImageSelected;
 
@@ -44,7 +45,6 @@ class _AddImageProfileWidgetState extends State<AddImageProfileWidget> {
                   pickImage(ImageSource.gallery);
                 },
               ),
-
               ListTile(
                 leading: Icon(Icons.camera_alt),
                 title: Text("Camera"),
@@ -78,7 +78,6 @@ class _AddImageProfileWidgetState extends State<AddImageProfileWidget> {
                         as ImageProvider,
             ),
           ),
-
           Positioned(
             bottom: 10,
             right: 10,
