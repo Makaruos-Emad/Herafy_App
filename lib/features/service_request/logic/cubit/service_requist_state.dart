@@ -1,22 +1,24 @@
 import 'package:herafy/features/service_request/data/best_tech_model.dart';
 import 'package:herafy/features/service_request/data/sorted_type_tech.dart';
 
-class ServiceRequestState {
-  final SortType selectedSort;
+abstract class ServiceRequestState {}
+
+class ServiceRequestInitial extends ServiceRequestState {}
+
+class ServiceRequestLoading extends ServiceRequestState {}
+
+class ServiceRequestSuccess extends ServiceRequestState {
   final List<BestTechnicalModel> technicians;
+  final SortType selectedSort;
 
-  ServiceRequestState({
-    required this.selectedSort,
+  ServiceRequestSuccess({
     required this.technicians,
+    required this.selectedSort,
   });
+}
 
-  ServiceRequestState copyWith({
-    SortType? selectedSort,
-    List<BestTechnicalModel>? technicians,
-  }) {
-    return ServiceRequestState(
-      selectedSort: selectedSort ?? this.selectedSort,
-      technicians: technicians ?? this.technicians,
-    );
-  }
+class ServiceRequestError extends ServiceRequestState {
+  final String message;
+
+  ServiceRequestError(this.message);
 }

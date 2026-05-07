@@ -5,10 +5,10 @@ import 'package:herafy/features/home/ui/widget/service_item.dart';
 import 'package:herafy/features/home/ui/widget/view_all.dart';
 
 final List<ServiceModel> services = [
-  ServiceModel(title: "نجارة", icon: "assets/icons/carpenter.svg"),
-  ServiceModel(title: "نظافة", icon: "assets/icons/cleaning.svg"),
-  ServiceModel(title: "سباكة", icon: "assets/icons/plumbing.svg"),
-  ServiceModel(title: "كهرباء", icon: "assets/icons/electric.svg"),
+  ServiceModel(title: "نجارة", icon: "assets/icons/carpenter.svg" ,id: 1),
+  ServiceModel(title: "تكييف", icon: "assets/icons/cleaning.svg",id: 6),
+  ServiceModel(title: "سباكة", icon: "assets/icons/plumbing.svg",id: 3),
+  ServiceModel(title: "كهرباء", icon: "assets/icons/electric.svg",id: 4),
 ];
 
 class ServicesSection extends StatelessWidget {

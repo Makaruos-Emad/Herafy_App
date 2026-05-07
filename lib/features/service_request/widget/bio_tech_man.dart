@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:readmore/readmore.dart';
 
 class BioTechnicialMan extends StatelessWidget {
-  const BioTechnicialMan({
-    super.key,
-  });
+  const BioTechnicialMan({super.key , required this.bio, required this.governorate, required this.city});
+  final String bio;
+  final String governorate ;
+  final String city;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +24,11 @@ class BioTechnicialMan extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                "نبذة عني",
-                style: AppTextStyles.semiBold20Black,
-              ),
+              child: Text("نبذة عني", style: AppTextStyles.semiBold20Black),
             ),
+            Text("انا من $governorate مركز $city", style: AppTextStyles.regular16GrayBlue),
             ReadMoreText(
-              "سباك محترف متخصص في السباكة الحديثة وصيانة المواتير والخزانات. أستخدم أحدث المعدات والأدوات لضمان أفضل جودة في العمل...سباك محترف متخصص في السباكة الحديثة وصيانة المواتير والخزانات. أستخدم أحدث المعدات والأدوات لضمان أفضل جودة في العمل...سباك محترف متخصص في السباكة الحديثة وصيانة المواتير والخزانات. أستخدم أحدث المعدات والأدوات لضمان أفضل جودة في العمل...",
+              bio,
               trimLines: 3,
               trimMode: TrimMode.Line,
               trimCollapsedText: 'قراءة المزيد',
