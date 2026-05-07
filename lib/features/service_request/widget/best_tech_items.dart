@@ -6,6 +6,7 @@ import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/features/service_request/data/best_tech_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BestTechItems extends StatelessWidget {
   const BestTechItems({super.key, required this.bestTechnical});
@@ -32,10 +33,25 @@ class BestTechItems extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      Assets.imagesNoImage,
-                      height: 90,
+                    child: CachedNetworkImage(
+                      imageUrl: bestTechnical.image,
+
                       width: 88,
+                      height: 90,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Image.asset(
+                        Assets.imagesNoImage,
+                        width: 88,
+                        height: 90,
+                        fit: BoxFit.cover,
+                      ),
+
+                      errorWidget: (context, url, error) => Image.asset(
+                        Assets.imagesNoImage,
+                        width: 88,
+                        height: 90,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -93,7 +109,11 @@ class BestTechItems extends StatelessWidget {
               width: 350,
               child: CustomButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.technicialSelectedProfileScreen);
+                  Navigator.pushNamed(
+                    context,
+                    Routes.technicialSelectedProfileScreen,
+                    arguments: bestTechnical.id,
+                  );
                 },
                 textStyle: AppTextStyles.regular16PrimaryColor,
                 side: const BorderSide(color: AppColors.primaryColor),

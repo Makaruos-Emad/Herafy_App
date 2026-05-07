@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/auth/ui/allow_location_screen.dart';
 import 'package:herafy/features/auth/ui/complete_profile_screen.dart';
 import 'package:herafy/features/auth/ui/login_number_screen.dart';
@@ -19,8 +18,6 @@ import 'package:herafy/features/requests/ui/report_problem_screen.dart';
 import 'package:herafy/features/requests/ui/request_tracker_screen.dart';
 import 'package:herafy/features/requests/ui/view_invoice_screen.dart';
 import 'package:herafy/features/profile/ui/edit_profile_screen.dart';
-import 'package:herafy/features/service_request/data/best_tech_model.dart';
-import 'package:herafy/features/service_request/logic/cubit/service_requist_cubit.dart';
 import 'package:herafy/features/service_request/models/check_request_args.dart';
 import 'package:herafy/features/service_request/ui/book_appointment_screen.dart';
 import 'package:herafy/features/service_request/ui/check_request_screen.dart';
@@ -30,6 +27,7 @@ import 'package:herafy/features/service_request/ui/tech_selected_profile_screen.
 import 'package:herafy/features/technical_task/ui/closed_task_back_home_screen.dart';
 import 'package:herafy/features/technical_task/ui/finish_task_from_tech_screen.dart';
 import 'package:herafy/features/technical_task/ui/task_details_screnn.dart';
+import 'package:herafy/generated/l10n.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -41,9 +39,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginNumberScreen());
 
       case Routes.enterCodeScreen:
-        return MaterialPageRoute(
-          builder: (_) => EnterCodeScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => EnterCodeScreen());
       case Routes.userTypeSelectionScreen:
         return MaterialPageRoute(builder: (_) => UserTypeSelectionScreen());
 
@@ -57,15 +53,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeClientScreen());
 
       case Routes.selectTechnicianScreen:
+        final args = settings.arguments as int;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => ServiceRequestCubit(bestTechnicals),
-            child: const SelectTechnicianScreen(),
-          ),
+          builder: (_) => SelectTechnicianScreen(serviceId: args),
         );
       case Routes.technicialSelectedProfileScreen:
+        final args = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const TechSelectedProfileScreen(),
+          builder: (context) => TechSelectedProfileScreen(id: args),
         );
       case Routes.bookAppointmentScreen:
         return MaterialPageRoute(builder: (context) => BookAppointmentScreen());

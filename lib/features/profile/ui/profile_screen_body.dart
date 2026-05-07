@@ -5,6 +5,7 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/features/profile/cubit/profile_cubit.dart';
 import 'package:herafy/features/profile/cubit/profile_state.dart';
+import 'package:herafy/features/profile/helper/save_id_client_in_storge.dart';
 import 'package:herafy/features/profile/widgets/turn_on_off_buttom.dart';
 
 class ProfileScreenBody extends StatelessWidget {
@@ -19,6 +20,7 @@ class ProfileScreenBody extends StatelessWidget {
         }
         if (state is ProfileSuccess) {
           final data = state.profile;
+          saveIdClient(data["userId"] ?? "");
           return Scaffold(
             appBar: AppBar(
               title: const Text("حسابي", style: AppTextStyles.bold24DarkBlue),
@@ -125,14 +127,12 @@ class ProfileScreenBody extends StatelessWidget {
                               onTap: () {},
                             ),
                           ],
-    
                           SizedBox(height: 10),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
-    
                   Text(
                     "الدعم والمساعدة",
                     style: AppTextStyles.regular16GrayBlue,
@@ -170,7 +170,7 @@ class ProfileScreenBody extends StatelessWidget {
             ),
           );
         }
-    
+
         if (state is ProfileError) {
           return Center(child: Text(state.error));
         }
