@@ -10,7 +10,7 @@ class UserAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: 22,
       backgroundColor: AppColors.primaryColor,
-      child: CircleAvatar(radius: 20, backgroundImage: AssetImage(userImage)),
+      child: CircleAvatar(radius: 20, backgroundImage: NetworkImage(userImage)),
     );
   }
 }

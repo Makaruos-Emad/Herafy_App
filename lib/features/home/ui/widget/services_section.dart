@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/routing/routes.dart';
-import 'package:herafy/features/home/model/service_model.dart';
-import 'package:herafy/features/home/ui/widget/service_item.dart';
-import 'package:herafy/features/home/ui/widget/view_all.dart';
-
-final List<ServiceModel> services = [
-  ServiceModel(title: "نجارة", icon: "assets/icons/carpenter.svg" ,id: 1),
-  ServiceModel(title: "تكييف", icon: "assets/icons/cleaning.svg",id: 6),
-  ServiceModel(title: "سباكة", icon: "assets/icons/plumbing.svg",id: 3),
-  ServiceModel(title: "كهرباء", icon: "assets/icons/electric.svg",id: 4),
-];
+import 'package:herafy/core/theme/app_text_styles.dart';
+import 'package:herafy/features/home/data/all_services_items.dart';
+import 'package:herafy/features/home/ui/widget/all_service_item.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final services = AllServicesItems().getServices();
+
     return Column(
       children: [
-        ViewAll(
-          title: 'الخدمات',
-          onTap: () {
-            Navigator.pushNamed(context, Routes.allServicesScreen);
-          },
-        ),
+        Text("الخدمات", style: AppTextStyles.bold24DarkBlue),
         const SizedBox(height: 8),
-
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -33,11 +21,11 @@ class ServicesSection extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             crossAxisSpacing: 16,
-            childAspectRatio: 0.8,
+            mainAxisSpacing: 24,
+            childAspectRatio: 1,
           ),
-
           itemBuilder: (context, index) {
-            return ServiceItem(service: services[index]);
+            return AllServiceItem(service: services[index]);
           },
         ),
       ],

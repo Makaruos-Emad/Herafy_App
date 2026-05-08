@@ -27,7 +27,6 @@ import 'package:herafy/features/service_request/ui/tech_selected_profile_screen.
 import 'package:herafy/features/technical_task/ui/closed_task_back_home_screen.dart';
 import 'package:herafy/features/technical_task/ui/finish_task_from_tech_screen.dart';
 import 'package:herafy/features/technical_task/ui/task_details_screnn.dart';
-import 'package:herafy/generated/l10n.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {

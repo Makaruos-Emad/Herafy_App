@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/core/widgets/dots_indicator.dart';
-import 'package:herafy/features/home/ui/widget/promo_card.dart';
 
 class PromoSlider extends StatefulWidget {
   const PromoSlider({super.key});
@@ -17,7 +17,11 @@ class _PromoSliderState extends State<PromoSlider> {
 
   Timer? _timer;
 
-  final List<Color> banners = [Colors.blue, Colors.orange, Colors.green];
+  final List<String> banners = [
+    Assets.imagesShowOne,
+    Assets.imagesShowTwo,
+    Assets.imagesShowThree,
+  ];
 
   @override
   void initState() {
@@ -52,7 +56,7 @@ class _PromoSliderState extends State<PromoSlider> {
       child: Column(
         children: [
           SizedBox(
-            height: 160,
+            height: 180,
             child: PageView.builder(
               controller: _controller,
               onPageChanged: (index) {
@@ -62,7 +66,11 @@ class _PromoSliderState extends State<PromoSlider> {
               },
               itemBuilder: (context, index) {
                 final banner = banners[index % banners.length];
-                return PromoCard(color: banner);
+                return Image.asset(
+                  banner,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                );
               },
             ),
           ),
