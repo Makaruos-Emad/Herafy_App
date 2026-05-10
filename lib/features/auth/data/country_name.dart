@@ -1,6 +1,23 @@
 import 'package:herafy/features/auth/models/list_contry.dart';
 
 final List<Country> governorates = [
+
+  Country(
+    title: "سوهاج",
+    centers: [
+      "سوهاج",
+      "أخميم",
+      "البلينا",
+      "المراغة",
+      "المنشأة",
+      "دار السلام",
+      "جرجا",
+      "جهينة",
+      "ساقلته",
+      "طما",
+      "طهطا",
+    ],
+  ),
   Country(
     title: "القاهرة",
     centers: [
@@ -251,22 +268,6 @@ final List<Country> governorates = [
       "العريش",
       "الشيخ زويد",
       "رفح",
-    ],
-  ),
-  Country(
-    title: "سوهاج",
-    centers: [
-      "سوهاج",
-      "أخميم",
-      "البلينا",
-      "المراغة",
-      "المنشأة",
-      "دار السلام",
-      "جرجا",
-      "جهينة",
-      "ساقلته",
-      "طما",
-      "طهطا",
     ],
   ),
 ];
