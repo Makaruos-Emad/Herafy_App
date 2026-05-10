@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/auth/ui/allow_location_screen.dart';
 import 'package:herafy/features/auth/ui/complete_profile_screen.dart';
 import 'package:herafy/features/auth/ui/login_number_screen.dart';
@@ -18,6 +19,7 @@ import 'package:herafy/features/requests/ui/report_problem_screen.dart';
 import 'package:herafy/features/requests/ui/request_tracker_screen.dart';
 import 'package:herafy/features/requests/ui/view_invoice_screen.dart';
 import 'package:herafy/features/profile/ui/edit_profile_screen.dart';
+import 'package:herafy/features/service_request/cubit/cubit_technical_details/technical_details_cubit.dart';
 import 'package:herafy/features/service_request/models/check_request_args.dart';
 import 'package:herafy/features/service_request/ui/book_appointment_screen.dart';
 import 'package:herafy/features/service_request/ui/check_request_screen.dart';
@@ -59,25 +61,24 @@ class AppRouter {
       case Routes.technicialSelectedProfileScreen:
         final args = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => TechSelectedProfileScreen(id: args),
+          builder: (context) => BlocProvider(
+            create: (context) => TechnicalDetailsCubit()..getAllData(args),
+            child: TechSelectedProfileScreen(id: args),
+          ),
         );
       case Routes.bookAppointmentScreen:
         return MaterialPageRoute(builder: (context) => BookAppointmentScreen());
       case Routes.checkRequestScreen:
-        final args = settings.arguments;
-        if (args is! CheckRequestArgs) {
-          return _errorRoute(
-            'Missing/invalid arguments for ${Routes.checkRequestScreen}. '
-            'Expected CheckRequestArgs.',
-          );
-        }
+        final args = settings.arguments as CheckRequestArgs;
+
         return MaterialPageRoute(
-          builder: (context) => CheckRequestScreen(
+          builder: (_) => CheckRequestScreen(
             time: args.time,
             date: args.date,
             address: args.address,
             governorate: args.governorate,
             center: args.center,
+            problemDetails: args.problemDetails,
           ),
         );
 
@@ -130,14 +131,5 @@ class AppRouter {
       default:
         return null;
     }
-  }
-
-  Route _errorRoute(String message) {
-    return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text('Routing Error')),
-        body: Center(child: Text(message, textAlign: TextAlign.center)),
-      ),
-    );
   }
 }

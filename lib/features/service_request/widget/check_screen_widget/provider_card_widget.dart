@@ -1,13 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/core/widgets/base_card_container.dart';
 import 'package:herafy/features/service_request/widget/check_screen_widget/warning_banner.dart';
+
 class ProviderCard extends StatelessWidget {
   final double width;
+  final Map<String, dynamic> details;
 
-  const ProviderCard({super.key, required this.width});
+  const ProviderCard({super.key, required this.width, required this.details});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,11 @@ class ProviderCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: width * 0.07,
-                backgroundImage: AssetImage(Assets.imagesUserImage),
+                backgroundImage:
+                    (details["profileImageURL"] != null &&
+                        details["profileImageURL"].toString().isNotEmpty)
+                    ? NetworkImage(details["profileImageURL"])
+                    : const AssetImage(Assets.imagesNoImage) as ImageProvider,
               ),
               const SizedBox(width: 10),
 
@@ -28,14 +33,14 @@ class ProviderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "محمد علي",
+                      details["fullname"],
                       style: AppTextStyles.semiBold20Black.copyWith(
                         fontSize: width * 0.045,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      "سباك وكشف تسريبات",
+                      details["serviceCategory"],
                       style: AppTextStyles.regular16GrayBlue,
                     ),
                   ],
@@ -43,7 +48,10 @@ class ProviderCard extends StatelessWidget {
               ),
 
               const SizedBox(width: 10),
-              Text("4.5", style: AppTextStyles.regular16PrimaryColor),
+              Text(
+                details["ratingAvg"].toStringAsFixed(1),
+                style: AppTextStyles.regular16PrimaryColor,
+              ),
               const SizedBox(width: 5),
               const Icon(Icons.star, color: Colors.amber),
             ],

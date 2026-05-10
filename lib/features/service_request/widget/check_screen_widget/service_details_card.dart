@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
@@ -15,6 +14,9 @@ class ServiceDetailsCard extends StatelessWidget {
   final String address;
   final String governorate;
   final String center;
+  final String problemDetails;
+  final double price;
+  final String serviceType;
 
   const ServiceDetailsCard({
     super.key,
@@ -25,6 +27,9 @@ class ServiceDetailsCard extends StatelessWidget {
     required this.address,
     required this.governorate,
     required this.center,
+    required this.problemDetails,
+    required this.price,
+    required this.serviceType,
   });
 
   @override
@@ -40,7 +45,7 @@ class ServiceDetailsCard extends StatelessWidget {
           InfoItem(
             icon: Icons.build,
             title: "نوع الخدمة",
-            value: "معاينة سباكة",
+            value: "معاينة $serviceType",
             width: width,
           ),
 
@@ -63,6 +68,14 @@ class ServiceDetailsCard extends StatelessWidget {
           ),
 
           const Divider(),
+          InfoItem(
+            icon: Icons.build,
+            title: "تفاصيل المشكلة",
+            value: problemDetails,
+            width: width,
+          ),
+
+          const Divider(),
 
           SectionTitle(width: width, text: "ملخص الدفع"),
           const SizedBox(height: 10),
@@ -72,7 +85,7 @@ class ServiceDetailsCard extends StatelessWidget {
               Text("سعر المعاينة", style: AppTextStyles.regular16GrayBlue),
               const Spacer(),
               Text(
-                "50 ج.م",
+                "${price.toStringAsFixed(1)} ج.م",
                 style: AppTextStyles.semiBold20Black.copyWith(
                   color: AppColors.primaryColor,
                   fontSize: width * 0.06,
