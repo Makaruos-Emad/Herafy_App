@@ -7,8 +7,9 @@ import 'package:herafy/features/service_request/logic/cubit/service_requist_cubi
 import 'package:herafy/features/service_request/widget/select_tech_screen_body.dart';
 
 class SelectTechnicianScreen extends StatelessWidget {
-  const SelectTechnicianScreen({super.key, required this.serviceId});
+  const SelectTechnicianScreen({super.key, required this.serviceId,required this.title});
   final int serviceId;
+  final String title ;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -16,7 +17,7 @@ class SelectTechnicianScreen extends StatelessWidget {
         ..getTechnicians(SortType.topRated),
       child: Scaffold(
         appBar: CustomAppBar(
-          title: "أفضل السباكين",
+          title: "عمال $title",
           onpress: () {
             Navigator.pop(context);
           },

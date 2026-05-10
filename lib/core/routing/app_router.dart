@@ -6,6 +6,7 @@ import 'package:herafy/features/auth/ui/login_number_screen.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/features/auth/ui/enter_code_screen.dart';
 import 'package:herafy/features/auth/ui/user_type_selection_screen.dart';
+import 'package:herafy/features/home/model/all_services_item_model.dart';
 import 'package:herafy/features/home/ui/all_services_screen.dart';
 import 'package:herafy/features/home/ui/home_client_screen.dart';
 import 'package:herafy/features/home/ui/home_technician_screen.dart';
@@ -54,9 +55,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeClientScreen());
 
       case Routes.selectTechnicianScreen:
-        final args = settings.arguments as int;
+        final args = settings.arguments as AllServicesItemModel;
         return MaterialPageRoute(
-          builder: (_) => SelectTechnicianScreen(serviceId: args),
+          builder: (_) => SelectTechnicianScreen(serviceId: args.id, title: args.title),
         );
       case Routes.technicialSelectedProfileScreen:
         final args = settings.arguments as String;

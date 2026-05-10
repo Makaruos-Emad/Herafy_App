@@ -14,7 +14,7 @@ class AllServiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.selectTechnicianScreen ,arguments: service.id);
+        Navigator.pushNamed(context, Routes.selectTechnicianScreen ,arguments: service);
       },
       child: Container(
         decoration: BoxDecoration(
