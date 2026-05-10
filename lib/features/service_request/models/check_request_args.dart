@@ -7,6 +7,7 @@ class CheckRequestArgs {
     required this.address,
     required this.governorate,
     required this.center,
+    required this.problemDetails,
   });
 
   final TimeOfDay time;
@@ -14,5 +15,6 @@ class CheckRequestArgs {
   final String address;
   final String governorate ;
   final String center ;
+  final String problemDetails ;
 }
 

@@ -13,7 +13,8 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => ProfileCubit()..getProfile()),
+        BlocProvider(create: (context) => ProfileCubit()..getProfile(),
+        ),
       ],
       child: HerafyApp(appRouter: AppRouter()),
     ),
