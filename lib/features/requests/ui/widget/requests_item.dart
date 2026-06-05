@@ -35,7 +35,10 @@ class RequestsItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    Text(request.id, style: AppTextStyles.regular16GrayBlue),
+                    Text(
+                      request.id.toString(),
+                      style: AppTextStyles.regular16GrayBlue,
+                    ),
                   ],
                 ),
               ),
@@ -43,7 +46,13 @@ class RequestsItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: request.status == "مكتمل"
+                      ? AppColors.primaryColor
+                      : (request.status == "قيد الانتظار")
+                      ? Colors.orange
+                      : (request.status == "مرفوض" || request.status == "ملغي")
+                      ? Colors.red
+                      : Colors.green,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
@@ -78,7 +87,9 @@ class RequestsItem extends StatelessWidget {
             ],
           ),
           SizedBox(height: 24),
-          request.status == "مكتمل"
+          request.status == "مكتمل" ||
+                  request.status == "مرفوض" ||
+                  request.status == "ملغي"
               ? CustomButton(
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.invoiceDetailsScreen);

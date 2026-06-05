@@ -48,7 +48,7 @@ class HistoryTechnicianRequestsItem extends StatelessWidget {
             SizedBox(height: 8),
             Text(request.title, style: AppTextStyles.regular16Black),
             SizedBox(height: 8),
-            Text(request.id, style: AppTextStyles.regular12Black),
+            Text(request.id.toString(), style: AppTextStyles.regular12Black),
             SizedBox(height: 8),
             Row(
               children: [
