@@ -130,4 +130,17 @@ class ApiService {
         .map((e) => RequestsModel.fromJson(e))
         .toList();
   }
+
+  Future<OrderDetailsModel> getOrderDetails({
+    required String token,
+    required int orderId,
+  }) async {
+    final response = await dio.get(
+      "Order/GetOrderDetails",
+      queryParameters: {"orderId": orderId},
+      options: Options(headers: {"Authorization": "Bearer $token"}),
+    );
+
+    return OrderDetailsModel.fromJson(response.data);
+  }
 }
