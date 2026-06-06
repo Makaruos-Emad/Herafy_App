@@ -107,7 +107,11 @@ class AppRouter {
         );
 
       case Routes.reportProblemScreen:
-        return MaterialPageRoute(builder: (_) => const ReportProblemScreen());
+        final int orderId = settings.arguments as int;
+
+        return MaterialPageRoute(
+          builder: (_) => ReportProblemScreen(orderId: orderId),
+        );
 
       case Routes.requestTrackerScreen:
         return MaterialPageRoute(builder: (_) => const RequestTrackerScreen());

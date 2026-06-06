@@ -8,7 +8,8 @@ import 'package:herafy/features/requests/ui/widget/request_card.dart';
 import 'package:herafy/features/requests/ui/widget/service_port.dart';
 
 class InvoiceDetailsScreenBody extends StatelessWidget {
-  const InvoiceDetailsScreenBody({super.key});
+  const InvoiceDetailsScreenBody({super.key, required this.orderId});
+  final int orderId; // Replace with actual request ID
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,11 @@ class InvoiceDetailsScreenBody extends StatelessWidget {
               Spacer(),
               CustomButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "reportProblemScreen");
+                  Navigator.pushNamed(
+                    context,
+                    "reportProblemScreen",
+                    arguments: orderId,
+                  );
                 },
                 text: "الإبلاغ عن مشكلة",
               ),

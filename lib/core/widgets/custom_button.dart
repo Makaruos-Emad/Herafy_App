@@ -34,7 +34,9 @@ class CustomButton extends StatelessWidget {
               : (backgroundColor ?? AppColors.primaryColor),
         ),
         onPressed: onPressed,
-        child: child != null ? child! :Text(text!, style: textStyle ?? AppTextStyles.semiBold16White) ,
+        child: child != null
+            ? child!
+            : Text(text!, style: textStyle ?? AppTextStyles.semiBold16White),
       ),
     );
   }

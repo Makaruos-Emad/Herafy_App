@@ -143,4 +143,17 @@ class ApiService {
 
     return OrderDetailsModel.fromJson(response.data);
   }
+
+  Future<void> createComplaint({
+    required String token,
+    required int orderId,
+    required String title,
+    required String description,
+  }) async {
+    await dio.post(
+      "Complaints/CreateComplaint",
+      data: {"orderId": orderId, "title": title, "description": description},
+      options: Options(headers: {"Authorization": "Bearer $token"}),
+    );
+  }
 }

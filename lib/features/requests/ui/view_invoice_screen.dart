@@ -30,7 +30,7 @@ class InvoiceDetailsScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                     horizontal: kHorizontalPadding,
                   ),
-                  child: InvoiceDetailsScreenBody(),
+                  child: InvoiceDetailsScreenBody(orderId: orderId),
                 ),
               ),
             ],
