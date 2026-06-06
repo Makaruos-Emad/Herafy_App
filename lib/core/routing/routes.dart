@@ -27,4 +27,5 @@ class Routes {
   static const String finishTaskScreen = 'finishTaskScreen';
   static const String closedTaskBackHomeScreen = 'closedTaskBackHomeScreen';
   static const String homeTechnicianScreen = 'homeTechnicianScreen';
+  static const String editTechnicianProfile = 'editTechnicianProfile';
 }
