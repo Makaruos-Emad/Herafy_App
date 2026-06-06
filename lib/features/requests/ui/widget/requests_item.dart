@@ -92,7 +92,11 @@ class RequestsItem extends StatelessWidget {
                   request.status == "ملغي"
               ? CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.invoiceDetailsScreen);
+                    Navigator.pushNamed(
+                      context,
+                      Routes.invoiceDetailsScreen,
+                      arguments: request.id, // أو أي id عندك
+                    );
                   },
                   text: "عرض الفاتورة",
                 )
@@ -116,6 +120,7 @@ class RequestsItem extends StatelessWidget {
                           Navigator.pushNamed(
                             context,
                             Routes.invoiceDetailsScreen,
+                            arguments: request.id,
                           );
                         },
                         text: "تفاصيل",

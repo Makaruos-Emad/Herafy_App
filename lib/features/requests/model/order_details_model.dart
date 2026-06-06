@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:herafy/core/utils/service_icon.dart';
+
 class OrderDetailsModel {
   final int id;
   final String serviceName;
@@ -14,6 +17,7 @@ class OrderDetailsModel {
   final String nameTechnician;
   final double ratingAvg;
   final String state;
+  final IconData icon;
 
   OrderDetailsModel({
     required this.id,
@@ -31,6 +35,7 @@ class OrderDetailsModel {
     required this.nameTechnician,
     required this.ratingAvg,
     required this.state,
+    required this.icon,
   });
 
   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +55,7 @@ class OrderDetailsModel {
       nameTechnician: json['nameTechnician'],
       ratingAvg: (json['ratingAvg'] as num).toDouble(),
       state: json['state'],
+      icon: getServiceIcon(json['serviceName']),
     );
   }
 }

@@ -5,7 +5,15 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_container.dart';
 
 class ServicePort extends StatelessWidget {
-  const ServicePort({super.key});
+  const ServicePort({
+    super.key,
+    required this.nameTechnician,
+    required this.ratingAvg,
+    required this.imageTecURL,
+  });
+  final String nameTechnician;
+  final double ratingAvg;
+  final String imageTecURL;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +25,18 @@ class ServicePort extends StatelessWidget {
           SizedBox(height: 8),
           Row(
             children: [
-              CircleAvatar(radius: 40),
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(imageTecURL),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                  ),
+                ),
+              ),
               SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -26,10 +45,10 @@ class ServicePort extends StatelessWidget {
                   children: [
                     Text("نفذ بواسطة", style: AppTextStyles.regular12Black),
                     SizedBox(height: 8),
-                    Text("اسم الفني", style: AppTextStyles.regular16Black),
+                    Text(nameTechnician, style: AppTextStyles.regular16Black),
                     SizedBox(height: 8),
                     RatingBarIndicator(
-                      rating: 4.5,
+                      rating: ratingAvg,
                       itemBuilder: (context, index) =>
                           Icon(Icons.star, color: AppColors.yellow),
                       itemCount: 5,

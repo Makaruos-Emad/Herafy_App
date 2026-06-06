@@ -136,7 +136,7 @@ class ApiService {
     required int orderId,
   }) async {
     final response = await dio.get(
-      "Order/GetOrderDetails",
+      "Order/GetDetailsOrderClient",
       queryParameters: {"orderId": orderId},
       options: Options(headers: {"Authorization": "Bearer $token"}),
     );
