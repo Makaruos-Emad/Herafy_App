@@ -100,33 +100,15 @@ class RequestsItem extends StatelessWidget {
                   },
                   text: "عرض الفاتورة",
                 )
-              : Row(
-                  children: [
-                    Expanded(
-                      child: CustomButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            Routes.requestTrackerScreen,
-                          );
-                        },
-                        text: "تتبع الطلب",
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: CustomOutlinedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            Routes.invoiceDetailsScreen,
-                            arguments: request.id,
-                          );
-                        },
-                        text: "تفاصيل",
-                      ),
-                    ),
-                  ],
+              : CustomButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.invoiceDetailsScreen,
+                      arguments: request.id,
+                    );
+                  },
+                  text: "عرض التفاصيل",
                 ),
         ],
       ),
