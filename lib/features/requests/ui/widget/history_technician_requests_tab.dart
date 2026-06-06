@@ -9,7 +9,7 @@ class HistoryTechnicianRequestsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<RequestsModel> historyTechnicianRequests = [
       RequestsModel(
-        id: "# 2543",
+        id: 3,
         title: "صيانة مروحه",
         icon: Icons.design_services,
         status: "مكتمل",
@@ -17,7 +17,7 @@ class HistoryTechnicianRequestsTab extends StatelessWidget {
         price: 150,
       ),
       RequestsModel(
-        id: "# 2544",
+        id: 3,
         title: "صيانة باب",
         icon: Icons.web,
         status: "مكتمل",

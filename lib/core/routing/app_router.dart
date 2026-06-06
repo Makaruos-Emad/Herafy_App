@@ -57,7 +57,8 @@ class AppRouter {
       case Routes.selectTechnicianScreen:
         final args = settings.arguments as AllServicesItemModel;
         return MaterialPageRoute(
-          builder: (_) => SelectTechnicianScreen(serviceId: args.id, title: args.title),
+          builder: (_) =>
+              SelectTechnicianScreen(serviceId: args.id, title: args.title),
         );
       case Routes.technicialSelectedProfileScreen:
         final args = settings.arguments as String;
@@ -99,10 +100,18 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
 
       case Routes.invoiceDetailsScreen:
-        return MaterialPageRoute(builder: (_) => const InvoiceDetailsScreen());
+        final int orderId = settings.arguments as int;
+
+        return MaterialPageRoute(
+          builder: (_) => InvoiceDetailsScreen(orderId: orderId),
+        );
 
       case Routes.reportProblemScreen:
-        return MaterialPageRoute(builder: (_) => const ReportProblemScreen());
+        final int orderId = settings.arguments as int;
+
+        return MaterialPageRoute(
+          builder: (_) => ReportProblemScreen(orderId: orderId),
+        );
 
       case Routes.requestTrackerScreen:
         return MaterialPageRoute(builder: (_) => const RequestTrackerScreen());

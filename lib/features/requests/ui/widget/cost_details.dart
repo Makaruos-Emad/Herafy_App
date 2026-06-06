@@ -4,10 +4,13 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_container.dart';
 
 class CostDetails extends StatelessWidget {
-  const CostDetails({super.key});
+  const CostDetails({super.key, required this.inspectedPrice});
+  final double inspectedPrice;
 
   @override
   Widget build(BuildContext context) {
+    double finalPrice = inspectedPrice; // Example of calculating final price
+
     return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +27,7 @@ class CostDetails extends StatelessWidget {
             children: [
               Text("رسوم المعاينة", style: AppTextStyles.regular16Black),
               Text(
-                "50 ج.م",
+                "$inspectedPrice ج.م",
                 style: AppTextStyles.bold16PrimaryColor.copyWith(
                   color: AppColors.black,
                 ),
@@ -44,7 +47,7 @@ class CostDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                "50 ج.م",
+                "$finalPrice ج.م",
                 style: AppTextStyles.bold24DarkBlue.copyWith(
                   color: AppColors.primaryColor,
                 ),
