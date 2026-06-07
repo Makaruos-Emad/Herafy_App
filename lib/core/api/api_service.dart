@@ -203,4 +203,22 @@ class ApiService {
       options: Options(headers: {"Authorization": "Bearer $technicianToken"}),
     );
   }
+
+  Future<void> changeStatusOrder({
+    required String token,
+    required int orderId,
+    required int status,
+  }) async {
+    await dio.patch(
+      "Order/ChangeStatusOrder",
+      queryParameters: {"orderId": orderId},
+      data: status,
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+  }
 }

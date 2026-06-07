@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -94,8 +93,12 @@ class _EditTechnicianProfileScreenState
                       city: selectedCity ?? data["city"] ?? "",
                       image: imageFile,
                       bio: bioController.text,
-                      experienceYears: int.parse(experienceYearsController.text),
-                      inspectedPrice: double.parse(inspectedPriceController.text),
+                      experienceYears: int.parse(
+                        experienceYearsController.text,
+                      ),
+                      inspectedPrice: double.parse(
+                        inspectedPriceController.text,
+                      ),
                     );
                   },
                   text: "حفظ التعديلات",
