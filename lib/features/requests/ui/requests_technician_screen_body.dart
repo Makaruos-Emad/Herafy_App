@@ -13,8 +13,7 @@ class RequestsTechnicianScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          TechnicianOrdersCubit()..getTechnicianOrders(techId: "", state: 0),
+      create: (context) => TechnicianOrdersCubit()..getTechnicianOrders(),
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
