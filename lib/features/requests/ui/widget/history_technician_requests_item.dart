@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_container.dart';
-import 'package:herafy/features/requests/model/requests_model.dart';
+import 'package:herafy/features/requests/model/technician_order_model.dart';
 import 'package:intl/intl.dart';
 
 class HistoryTechnicianRequestsItem extends StatelessWidget {
   const HistoryTechnicianRequestsItem({super.key, required this.request});
 
-  final RequestsModel request;
+  final TechnicianOrderModel request;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +25,10 @@ class HistoryTechnicianRequestsItem extends StatelessWidget {
                     Icon(Icons.schedule, color: AppColors.grayBlue, size: 20),
                     SizedBox(width: 5),
                     Text(
-                      DateFormat('d MMMM hh:mm a', 'ar').format(request.time),
+                      DateFormat(
+                        'd MMMM hh:mm a',
+                        'ar',
+                      ).format(request.scheduledDate),
                       style: AppTextStyles.regular16GrayBlue,
                     ),
                   ],
@@ -33,11 +36,18 @@ class HistoryTechnicianRequestsItem extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: request.state == 'Completed'
+                        ? Colors.green
+                        : Colors.red,
+
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    request.status,
+                    request.state == 'Completed'
+                        ? 'مكتمل'
+                        : request.state == 'Canceled'
+                        ? 'ملغي'
+                        : "مرفوض",
                     style: AppTextStyles.regular16Black.copyWith(
                       color: AppColors.white,
                     ),
@@ -46,7 +56,7 @@ class HistoryTechnicianRequestsItem extends StatelessWidget {
               ],
             ),
             SizedBox(height: 8),
-            Text(request.title, style: AppTextStyles.regular16Black),
+            Text(request.serviceName, style: AppTextStyles.regular16Black),
             SizedBox(height: 8),
             Text(request.id.toString(), style: AppTextStyles.regular12Black),
             SizedBox(height: 8),
@@ -57,7 +67,7 @@ class HistoryTechnicianRequestsItem extends StatelessWidget {
                 Text("إجمالي المصنعية", style: AppTextStyles.regular12Black),
                 SizedBox(width: 5),
                 Text(
-                  request.price.toString(),
+                  request.inspectedPrice.toString(),
                   style: AppTextStyles.bold16PrimaryColor,
                 ),
               ],

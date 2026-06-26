@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:herafy/core/routing/routes.dart';
 import 'package:herafy/core/theme/app_colors.dart';
 import 'package:herafy/core/theme/app_text_styles.dart';
+import 'package:herafy/core/utils/time_formatting.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_container.dart';
 import 'package:herafy/core/widgets/icon_box.dart';
-import 'package:herafy/features/requests/model/new_technician_requests_model.dart';
+import 'package:herafy/features/requests/model/technician_order_model.dart';
 import 'package:herafy/features/requests/ui/widget/info_row.dart';
 
 class NewTechnicianRequestsItem extends StatelessWidget {
@@ -14,7 +15,7 @@ class NewTechnicianRequestsItem extends StatelessWidget {
     required this.newTechnicianRequestsModel,
   });
 
-  final NewTechnicianRequestsModel newTechnicianRequestsModel;
+  final TechnicianOrderModel newTechnicianRequestsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class NewTechnicianRequestsItem extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  IconBox(icon: Icons.build_outlined),
+                  IconBox(icon: newTechnicianRequestsModel.icon),
                   const SizedBox(width: 10),
                   Text(
-                    newTechnicianRequestsModel.title,
+                    newTechnicianRequestsModel.serviceName,
                     style: AppTextStyles.regular16Black,
                   ),
                   const Spacer(),
@@ -38,8 +39,8 @@ class NewTechnicianRequestsItem extends StatelessWidget {
                     color: AppColors.grayBlue,
                   ),
                   const SizedBox(width: 6),
-                  const Text(
-                    "منذ 2 دقيقة",
+                  Text(
+                    timeAgo(newTechnicianRequestsModel.scheduledTime),
                     style: TextStyle(color: Colors.orange),
                   ),
                 ],
@@ -51,18 +52,20 @@ class NewTechnicianRequestsItem extends StatelessWidget {
 
               InfoRow(
                 icon: Icons.location_on_outlined,
-                title: newTechnicianRequestsModel.location,
-                subtitle: newTechnicianRequestsModel.distance,
+                title: newTechnicianRequestsModel.placeDetails,
+                subtitle: "",
               ),
               const SizedBox(height: 16),
               InfoRow(
                 icon: Icons.calendar_today_outlined,
-                title: newTechnicianRequestsModel.dateTime,
+                title: formatDate(
+                  newTechnicianRequestsModel.scheduledDate.toString(),
+                ),
               ),
               const SizedBox(height: 16),
               InfoRow(
                 icon: Icons.attach_money,
-                title: "${newTechnicianRequestsModel.price} ج.م",
+                title: "${newTechnicianRequestsModel.inspectedPrice} ج.م",
                 subtitle: "معاينة",
                 isPrice: true,
               ),
