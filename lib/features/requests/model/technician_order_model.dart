@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:herafy/core/utils/service_icon.dart';
+
 class TechnicianOrderModel {
   final int id;
   final String placeDetails;
@@ -8,6 +11,7 @@ class TechnicianOrderModel {
   final double inspectedPrice;
   final String imageWorkURL;
   final String state;
+  final IconData icon;
 
   TechnicianOrderModel({
     required this.id,
@@ -19,6 +23,7 @@ class TechnicianOrderModel {
     required this.inspectedPrice,
     required this.imageWorkURL,
     required this.state,
+    required this.icon,
   });
 
   factory TechnicianOrderModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +37,7 @@ class TechnicianOrderModel {
       inspectedPrice: (json['inspectedPrice'] ?? 0).toDouble(),
       imageWorkURL: json['imageWorkURL'] ?? '',
       state: json['state'] ?? '',
+      icon: getServiceIcon(json['serviceName']),
     );
   }
 }
