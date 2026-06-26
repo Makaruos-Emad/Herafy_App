@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:herafy/features/requests/model/order_details_model.dart';
 import 'package:herafy/features/requests/model/requests_model.dart';
 import 'package:herafy/features/requests/model/technician_order_model.dart';
+import 'package:herafy/features/technical_task/model/order_details_technician_model.dart';
 
 class ApiService {
   late Dio dio;
@@ -171,5 +172,18 @@ class ApiService {
     return (response.data as List)
         .map((e) => TechnicianOrderModel.fromJson(e))
         .toList();
+  }
+
+  Future<OrderDetailsTechnicianModel> getOrderDetailsTechnician({
+    required String token,
+    required int orderId,
+  }) async {
+    final response = await dio.get(
+      "Order/GetDetailsOrderTechnician",
+      queryParameters: {"orderId": orderId},
+      options: Options(headers: {"Authorization": "Bearer $token"}),
+    );
+
+    return OrderDetailsTechnicianModel.fromJson(response.data);
   }
 }
