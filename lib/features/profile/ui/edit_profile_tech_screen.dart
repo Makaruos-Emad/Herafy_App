@@ -93,8 +93,12 @@ class _EditTechnicianProfileScreenState
                       city: selectedCity ?? data["city"] ?? "",
                       image: imageFile,
                       bio: bioController.text,
-                      experienceYears: int.parse(experienceYearsController.text),
-                      inspectedPrice: double.parse(inspectedPriceController.text),
+                      experienceYears: int.parse(
+                        experienceYearsController.text,
+                      ),
+                      inspectedPrice: double.parse(
+                        inspectedPriceController.text,
+                      ),
                     );
                   },
                   text: "حفظ التعديلات",
