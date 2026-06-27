@@ -46,7 +46,7 @@ class WidgetEnterNumber extends StatelessWidget {
                 context.read<AuthCubit>().submitPhone(_phoneNumber);
               }
             },
-            text: 'أرسال الكود',
+            text: 'تسجيل الدخول',
           ),
         ],
       ),
