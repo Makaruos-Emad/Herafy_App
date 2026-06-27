@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:herafy/core/api/api_service.dart';
+import 'package:herafy/features/profile/data/profile_api_service.dart';
 import 'package:herafy/features/profile/helper/save_id_client_in_storge.dart';
 import 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
 
-  final api = ApiService();
+  final api = ProfileApiService();
 
   void getProfile() async {
     emit(ProfileLoading());

@@ -37,7 +37,7 @@ class TaskDetailsbody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "محمد عبد الحميد",
+                      "مكاريوس عماد",
                       style: AppTextStyles.semiBold20Black,
                     ),
                     Text(

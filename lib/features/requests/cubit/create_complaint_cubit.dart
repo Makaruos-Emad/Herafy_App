@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:herafy/core/api/api_service.dart';
+import 'package:herafy/features/requests/data/requests_api_service.dart';
 import 'create_complaint_state.dart';
 
 class CreateComplaintCubit extends Cubit<CreateComplaintState> {
   CreateComplaintCubit() : super(CreateComplaintInitial());
 
-  final api = ApiService();
+  final api = RequestsApiService();
 
   void createComplaint({
     required int orderId,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:herafy/core/routing/routes.dart';
@@ -5,7 +7,9 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_form_field.dart';
+import 'package:herafy/features/auth/data/auth_api_service.dart';
 import 'package:herafy/features/auth/data/country_name.dart';
+import 'package:herafy/features/auth/logic/get_location_logic.dart';
 import 'package:herafy/features/auth/models/list_contry.dart';
 import 'package:herafy/features/auth/ui/widgets/add_image_profile_widget.dart';
 import 'package:herafy/features/auth/ui/widgets/custom_list_title.dart';
@@ -21,8 +25,11 @@ class BodyCompleteClientProfileScreen extends StatefulWidget {
 class _BodyCompleteClientProfileScreenState
     extends State<BodyCompleteClientProfileScreen> {
   final TextEditingController _fullNameController = TextEditingController();
+  final AuthApiService _authApiService = AuthApiService();
   Country? _selectedGovernorate;
   String? _selectedCenter;
+  File? _profileImage;
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -43,6 +50,61 @@ class _BodyCompleteClientProfileScreenState
     setState(() {});
   }
 
+  Future<void> _submit() async {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid || _isLoading) return;
+
+    if (_profileImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("من فضلك اختار صورة شخصية")),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final position = await getLocation();
+      if (!mounted) return;
+
+      if (position == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("من فضلك فعل الموقع واسمح بالوصول")),
+        );
+        return;
+      }
+
+      await _authApiService.addClient(
+        fullName: _fullNameController.text.trim(),
+        profileImage: _profileImage!,
+        city: _selectedCenter!,
+        government: _selectedGovernorate!.title,
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        Routes.homeClientScreen,
+        (route) => false,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final centers = _selectedGovernorate?.centers ?? const <String>[];
@@ -61,8 +123,10 @@ class _BodyCompleteClientProfileScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AddImageProfileWidget(
-                      onImageSelected: (p0) {
-                        
+                      onImageSelected: (image) {
+                        setState(() {
+                          _profileImage = image;
+                        });
                       },
                     ),
                     SizedBox(height: 30),
@@ -92,14 +156,12 @@ class _BodyCompleteClientProfileScreenState
                       initialValue: _selectedGovernorate,
                       leading: const Icon(Icons.location_city),
                       placeholderText: "اختار محافظة من فضلك",
-
                       validator: (value) {
                         if (value == null) {
                           return "من فضلك اختار المحافظة";
                         }
                         return null;
                       },
-
                       onSelected: (governorate) {
                         setState(() {
                           _selectedGovernorate = governorate;
@@ -108,7 +170,6 @@ class _BodyCompleteClientProfileScreenState
                       },
                     ),
                     const SizedBox(height: 12),
-
                     Text(
                       "المركز",
                       style: AppTextStyles.semiBold20Black,
@@ -121,14 +182,12 @@ class _BodyCompleteClientProfileScreenState
                       initialValue: _selectedCenter,
                       leading: const Icon(Icons.location_on_outlined),
                       placeholderText: "اختار مركز من فضلك",
-
                       validator: (value) {
                         if (value == null) {
                           return "من فضلك اختار المركز";
                         }
                         return null;
                       },
-
                       onSelected: (center) {
                         setState(() {
                           _selectedCenter = center;
@@ -143,14 +202,18 @@ class _BodyCompleteClientProfileScreenState
             SafeArea(
               top: false,
               child: CustomButton(
-                onPressed: () {
-                  final isValid = _formKey.currentState!.validate();
-
-                  if (isValid) {
-                    Navigator.pushNamed(context, Routes.allowLocationScreen);
-                  }
-                },
+                onPressed: _isLoading ? null : _submit,
                 text: 'استمرار',
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : null,
               ),
             ),
           ],

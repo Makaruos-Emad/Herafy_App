@@ -37,7 +37,7 @@ class CustomPinPut extends StatelessWidget {
         ),
         textStyle: const TextStyle(color: Colors.white, fontSize: 20),
       ),
-      length: 4,
+      length: 6,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.phone,
       separatorBuilder: (index) => const SizedBox(width: 20),

@@ -30,7 +30,7 @@ class HerafyApp extends StatelessWidget {
           // primaryColor: AppColors.primaryColor,
           appBarTheme: AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         ),
-        initialRoute: Routes.homeTechnicianScreen,
+        initialRoute: Routes.userTypeSelectionScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

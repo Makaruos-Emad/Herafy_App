@@ -6,6 +6,7 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/core/widgets/custom_app_bar.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
+import 'package:herafy/features/login_technical/data/api_login_tech.dart';
 import 'package:herafy/features/login_technical/widget/add_id_profile_tech_widget.dart';
 
 class UploadIdTechScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class UploadIdTechScreen extends StatefulWidget {
 class _UploadIdTechScreenState extends State<UploadIdTechScreen> {
   File? frontImage;
   File? backImage;
+  final LoginTechApi api = LoginTechApi();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +56,9 @@ class _UploadIdTechScreenState extends State<UploadIdTechScreen> {
               }
 
               // 👇 جاهز للـ API
-              print("Upload images 🚀");
-              Navigator.pushNamed(context, Routes.checkTechIdSuccessScreen);
+              api.addDocuments(faceImage: frontImage!, backImage: backImage!);
+
+              Navigator.pushNamedAndRemoveUntil(context, Routes.checkTechIdSuccessScreen ,(route) => false);
             },
             text: "تأكيد وإرسال",
           ),
