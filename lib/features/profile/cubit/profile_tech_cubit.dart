@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:herafy/core/api/api_service.dart';
 import 'package:herafy/features/profile/cubit/profile_tech_state.dart';
+import 'package:herafy/features/profile/data/profile_api_service.dart';
 
 class ProfileTechCubit extends Cubit<ProfileTechState> {
   ProfileTechCubit() : super(ProfileTechInitial());
 
-  final api = ApiService();
+  final api = ProfileApiService();
 
   void getProfile() async {
     emit(ProfileTechLoading());

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:herafy/core/api/api_service.dart';
+import 'package:herafy/features/service_request/data/service_request_api_service.dart';
 
 part 'technical_details_state.dart';
 
@@ -11,7 +11,7 @@ String? idTechnician;
 class TechnicalDetailsCubit extends Cubit<TechnicalDetailsState> {
   TechnicalDetailsCubit() : super(TechnicalDetailsInitial());
 
-  final ApiService apiService = ApiService();
+  final ServiceRequestApiService apiService = ServiceRequestApiService();
 
   Future<void> getAllData(String id) async {
     emit(TechnicalDetailsLoading());
@@ -38,37 +38,36 @@ class TechnicalDetailsCubit extends Cubit<TechnicalDetailsState> {
   }
 
   Future<void> addOrder({
-  required String clientId,
-  required int serviceId,
-  required String city,
-  required String government,
-  required String placeDetails,
-  required String problemDetails,
-  required DateTime scheduledDate,
-  required TimeOfDay scheduledTime,
-  required double inspectedPrice,
-}) async {
-  try {
-    final formattedTime =
-        "${scheduledTime.hour.toString().padLeft(2, '0')}:"
-        "${scheduledTime.minute.toString().padLeft(2, '0')}:00";
+    required String clientId,
+    required int serviceId,
+    required String city,
+    required String government,
+    required String placeDetails,
+    required String problemDetails,
+    required DateTime scheduledDate,
+    required TimeOfDay scheduledTime,
+    required double inspectedPrice,
+  }) async {
+    try {
+      final formattedTime = "${scheduledTime.hour.toString().padLeft(2, '0')}:"
+          "${scheduledTime.minute.toString().padLeft(2, '0')}:00";
 
-    final response = await apiService.createOrder(
-      clientId: clientId,
-      technicianId: idTechnician!,
-      serviceId: serviceId,
-      city: city,
-      government: government,
-      placeDetails: placeDetails,
-      problemDetails: problemDetails,
-      scheduledDate: scheduledDate,
-      scheduledTime: formattedTime,
-      inspectedPrice: inspectedPrice,
-    );
+      final response = await apiService.createOrder(
+        clientId: clientId,
+        technicianId: idTechnician!,
+        serviceId: serviceId,
+        city: city,
+        government: government,
+        placeDetails: placeDetails,
+        problemDetails: problemDetails,
+        scheduledDate: scheduledDate,
+        scheduledTime: formattedTime,
+        inspectedPrice: inspectedPrice,
+      );
 
-    print(response.data);
-  } catch (e) {
-    print(e.toString());
+      print(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
   }
-}
 }

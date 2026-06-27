@@ -59,10 +59,10 @@ class _UserTypeSelectionBodyState extends State<UserTypeSelectionBody> {
             ],
           ),
           Spacer(),
-          CustomButton(
+          CustomButton (
             onPressed: _selectedUserType == null
                 ? null
-                : () {
+                : () async {
                     context.read<AuthCubit>().selectUserType(_selectedUserType!);
                   },
             text: "التالي",

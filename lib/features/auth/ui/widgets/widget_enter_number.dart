@@ -43,7 +43,6 @@ class WidgetEnterNumber extends StatelessWidget {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!
                     .save(); //دي مهمة ف حتة لما ادوس  ارسال الكود بيروح واخد القيمة اللي انا كتبهتا
-                print(_phoneNumber);
                 context.read<AuthCubit>().submitPhone(_phoneNumber);
               }
             },

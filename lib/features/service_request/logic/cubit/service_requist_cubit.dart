@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:herafy/core/api/api_service.dart';
 import 'package:herafy/features/service_request/data/best_tech_model.dart';
+import 'package:herafy/features/service_request/data/service_request_api_service.dart';
 import 'package:herafy/features/service_request/data/sorted_type_tech.dart';
 import 'service_requist_state.dart';
 
@@ -9,7 +9,7 @@ class ServiceRequestCubit extends Cubit<ServiceRequestState> {
   ServiceRequestCubit(this.apiService, this.serviceId)
       : super(ServiceRequestInitial());
 
-  final ApiService apiService;
+  final ServiceRequestApiService apiService;
   final int serviceId;
 
   Future<void> getTechnicians(SortType type) async {
@@ -25,9 +25,8 @@ class ServiceRequestCubit extends Cubit<ServiceRequestState> {
 
       final List list = response.data;
 
-      final technicians = list
-          .map((e) => BestTechnicalModel.fromJson(e))
-          .toList();
+      final technicians =
+          list.map((e) => BestTechnicalModel.fromJson(e)).toList();
 
       emit(ServiceRequestSuccess(
         technicians: technicians,
