@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/features/requests/model/requests_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:herafy/features/requests/cubit/technician_orders_cubit.dart';
+import 'package:herafy/features/requests/cubit/technician_orders_state.dart';
 import 'package:herafy/features/requests/ui/widget/history_technician_requests_item.dart';
 
 class HistoryTechnicianRequestsTab extends StatelessWidget {
@@ -7,30 +9,28 @@ class HistoryTechnicianRequestsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<RequestsModel> historyTechnicianRequests = [
-      RequestsModel(
-        id: 3,
-        title: "صيانة مروحه",
-        icon: Icons.design_services,
-        status: "مكتمل",
-        time: DateTime.now(),
-        price: 150,
-      ),
-      RequestsModel(
-        id: 3,
-        title: "صيانة باب",
-        icon: Icons.web,
-        status: "مكتمل",
-        time: DateTime.now().subtract(Duration(days: 2)),
-        price: 500,
-      ),
-    ];
-    return ListView.builder(
-      itemCount: historyTechnicianRequests.length,
-      itemBuilder: (context, index) {
-        return HistoryTechnicianRequestsItem(
-          request: historyTechnicianRequests[index],
-        );
+    return BlocBuilder<TechnicianOrdersCubit, TechnicianOrdersState>(
+      builder: (context, state) {
+        if (state is TechnicianOrdersLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is TechnicianOrdersSuccessSplit) {
+          return ListView.builder(
+            itemCount: state.historyTechnicianRequests.length,
+            itemBuilder: (context, index) {
+              return HistoryTechnicianRequestsItem(
+                request: state.historyTechnicianRequests[index],
+              );
+            },
+          );
+        }
+
+        if (state is TechnicianOrdersError) {
+          return Center(child: Text(state.error));
+        }
+
+        return const SizedBox();
       },
     );
   }

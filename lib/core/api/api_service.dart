@@ -3,10 +3,11 @@ export 'package:herafy/features/profile/data/profile_api_service.dart';
 export 'package:herafy/features/requests/data/requests_api_service.dart';
 export 'package:herafy/features/service_request/data/service_request_api_service.dart';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:herafy/features/requests/model/order_details_model.dart';
 import 'package:herafy/features/requests/model/requests_model.dart';
+import 'package:herafy/features/requests/model/technician_order_model.dart';
+import 'package:herafy/features/technical_task/model/order_details_technician_model.dart';
 
 class ApiService {
   late Dio dio;
@@ -162,6 +163,33 @@ class ApiService {
     );
   }
 
+  Future<List<TechnicianOrderModel>> getTechnicianOrders({
+    required String token,
+    required String techId,
+    required int state,
+  }) async {
+    final response = await dio.get(
+      "Order/GetTechnicianOrders",
+      queryParameters: {"techId": techId, "state": state},
+      options: Options(headers: {"Authorization": "Bearer $token"}),
+    );
+
+    return (response.data as List)
+        .map((e) => TechnicianOrderModel.fromJson(e))
+        .toList();
+  }
+
+  Future<OrderDetailsTechnicianModel> getOrderDetailsTechnician({
+    required String token,
+    required int orderId,
+  }) async {
+    final response = await dio.get(
+      "Order/GetDetailsOrderTechnician",
+      queryParameters: {"orderId": orderId},
+      options: Options(headers: {"Authorization": "Bearer $token"}),
+    );
+
+    return OrderDetailsTechnicianModel.fromJson(response.data);
   Future<Response> getTechnicianProfile() async {
     return await dio.get(
       "Technicain/Profile",

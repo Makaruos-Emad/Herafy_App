@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:herafy/features/requests/cubit/technician_orders_cubit.dart';
+import 'package:herafy/features/requests/cubit/technician_orders_state.dart';
 import 'package:herafy/features/requests/ui/widget/upcoming_technician_requests_item.dart';
 
 class UpcomingTechnicianRequestsTab extends StatelessWidget {
@@ -6,10 +9,28 @@ class UpcomingTechnicianRequestsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return UpcomingTechnicianRequestsItem();
+    return BlocBuilder<TechnicianOrdersCubit, TechnicianOrdersState>(
+      builder: (context, state) {
+        if (state is TechnicianOrdersLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is TechnicianOrdersSuccessSplit) {
+          return ListView.builder(
+            itemCount: state.upcomingTechnicianRequests.length,
+            itemBuilder: (context, index) {
+              return UpcomingTechnicianRequestsItem(
+                technicianOrderModel: state.upcomingTechnicianRequests[index],
+              );
+            },
+          );
+        }
+
+        if (state is TechnicianOrdersError) {
+          return Center(child: Text(state.error));
+        }
+
+        return const SizedBox();
       },
     );
   }

@@ -16,6 +16,7 @@ import 'package:herafy/features/login_technical/ui/complete_profile_technical_sc
 import 'package:herafy/features/login_technical/ui/upload_id_tech_screen.dart';
 import 'package:herafy/features/notification/ui/notifications_screen.dart';
 import 'package:herafy/features/onboarding/ui/onboarding_screen.dart';
+import 'package:herafy/features/requests/cubit/change_status_order_cubit.dart';
 import 'package:herafy/features/profile/ui/edit_profile_tech_screen.dart';
 import 'package:herafy/features/requests/ui/report_problem_screen.dart';
 import 'package:herafy/features/requests/ui/request_tracker_screen.dart';
@@ -128,9 +129,31 @@ class AppRouter {
           builder: (_) => const CheckTechIdSuccessScreen(),
         );
       case Routes.taskDetailsScreen:
-        return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
+        final args = settings.arguments as Map<String, dynamic>;
+
+        final int orderId = args['orderId'];
+        final double price = args['price'];
+        final String orderStatus = args['orderStatus'];
+
+        return MaterialPageRoute(
+          builder: (_) => TaskDetailsScreen(
+            orderId: orderId,
+            orderStatus: orderStatus,
+            price: price,
+          ),
+        );
       case Routes.finishTaskScreen:
-        return MaterialPageRoute(builder: (_) => FinishTaskFromTechScreen());
+        final args = settings.arguments as Map<String, dynamic>;
+        final int orderId = args['orderId'];
+        final double price = args['price'];
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => ChangeStatusOrderCubit(),
+            child: FinishTaskFromTechScreen(price: price, orderId: orderId),
+          ),
+        );
+
       case Routes.closedTaskBackHomeScreen:
         return MaterialPageRoute(
           builder: (_) => const ClosedTaskBackHomeScreen(),
