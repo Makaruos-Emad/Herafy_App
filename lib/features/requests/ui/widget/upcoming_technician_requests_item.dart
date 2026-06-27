@@ -72,7 +72,15 @@ class UpcomingTechnicianRequestsItem extends StatelessWidget {
             SizedBox(height: 8),
             CustomButton(
               onPressed: () {
-                Navigator.pushNamed(context, Routes.taskDetailsScreen);
+                Navigator.pushNamed(
+                  context,
+                  Routes.taskDetailsScreen,
+                  arguments: {
+                    'orderId': technicianOrderModel.id,
+                    'orderStatus': technicianOrderModel.state,
+                    'price': technicianOrderModel.inspectedPrice,
+                  },
+                );
               },
               text: "بدء المهمة",
             ),
