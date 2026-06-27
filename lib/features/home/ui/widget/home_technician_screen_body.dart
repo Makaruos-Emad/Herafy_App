@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/home/ui/widget/earnings_card.dart';
 import 'package:herafy/features/home/ui/widget/home_app_bar.dart';
 import 'package:herafy/features/home/ui/widget/list_active_job_card.dart';
 import 'package:herafy/features/home/ui/widget/task_item.dart';
 import 'package:herafy/features/home/ui/widget/view_all.dart';
+import 'package:herafy/features/profile/cubit/profile_tech_cubit.dart';
+import 'package:herafy/features/profile/cubit/profile_tech_state.dart';
 
 class HomeTechnicianScreenBody extends StatelessWidget {
   const HomeTechnicianScreenBody({super.key});
@@ -12,7 +15,18 @@ class HomeTechnicianScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        HomeAppBar(),
+        BlocBuilder<ProfileTechCubit, ProfileTechState>(
+          builder: (context, state) {
+            return HomeAppBar(
+              fullName: state is ProfileTechSuccess
+                  ? (state.profile["fullname"] ?? "")
+                  : "",
+              userImage: state is ProfileTechSuccess
+                  ? (state.profile["profileImageURL"] ?? "")
+                  : "",
+            );
+          },
+        ),
         const SizedBox(height: 24),
         Expanded(
           child: CustomScrollView(

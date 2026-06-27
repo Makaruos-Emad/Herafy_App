@@ -51,16 +51,27 @@ class BuildButtomTurnOnOffItem extends StatelessWidget {
 }
 
 class ToggleButton extends StatefulWidget {
+  final bool initialValue;
   final Function(bool) onChanged; // 👈 callback
 
-  const ToggleButton({super.key, required this.onChanged});
+  const ToggleButton({
+    super.key,
+    this.initialValue = false,
+    required this.onChanged,
+  });
 
   @override
   State<ToggleButton> createState() => _ToggleButtonState();
 }
 
 class _ToggleButtonState extends State<ToggleButton> {
-  bool isActive = false; // حالة الزرار
+  late bool isActive; // حالة الزرار
+
+  @override
+  void initState() {
+    super.initState();
+    isActive = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {

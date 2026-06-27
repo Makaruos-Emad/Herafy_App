@@ -1,5 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/auth/cubit/auth_cubit/auth_state.dart';
+import 'package:herafy/features/auth/data/auth_api_service.dart';
+import 'package:herafy/features/auth/helper/auth_token_storage.dart';
+import 'package:herafy/features/auth/helper/save_user_type_in_storge.dart';
 
 enum UserType { technician, client }
 
@@ -9,24 +12,50 @@ class AuthCubit extends Cubit<AuthState> {
   UserType? userType;
   String? phone;
   String? otp;
-
+  final apiService = AuthApiService();
   // اختيار نوع المستخدم
-  void selectUserType(UserType type) {
+  Future<void> selectUserType(UserType type) async {
     userType = type;
+    if (userType == UserType.technician) {
+      await saveUserType(0);
+    } else {
+      await saveUserType(1);
+    }
     emit(AuthEnterPhone());
   }
 
   // إدخال الرقم
-  void submitPhone(String phoneNumber) {
+  Future<void> submitPhone(String phoneNumber) async {
     phone = phoneNumber;
-    emit(AuthEnterOtp());
-  }
+    emit(AuthLoading());
+    try {
+      final int userTypeId = await getUserType() ?? 0;
 
-  // إدخال الكود
-  void submitOtp(String code) {
-    otp = code;
-    emit(AuthEnterData());
+      final response = await apiService.getTokenFormPhoneNumber(
+        phoneNumber: phoneNumber,
+        userType: userTypeId,
+      );
+      final token = response.data['token'].toString();
+      await saveAuthToken(token);
+
+      if (response.data['isNew']) {
+        emit(AuthEnterData(
+          token: token,
+        ));
+      } else {
+        emit(AuthToHomePage(
+          token: token,
+        ));
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
   }
+  // إدخال الكود
+  // void submitOtp(String code) {
+  //   otp = code;
+  //   emit(AuthEnterData());
+  // }
 
   // رجوع
   void goBack() {

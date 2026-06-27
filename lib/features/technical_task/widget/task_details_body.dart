@@ -34,6 +34,44 @@ class TaskDetailsbody extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(kHorizontalPadding),
+    return Padding(
+      padding: const EdgeInsets.all(kHorizontalPadding),
+      child: Column(
+        children: [
+          BaseCard(
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: height * 0.04,
+                  backgroundImage: AssetImage(Assets.imagesUserImage),
+                ),
+                SizedBox(width: width * 0.03),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "مكاريوس عماد",
+                      style: AppTextStyles.semiBold20Black,
+                    ),
+                    Text(
+                      "٢٣ شارع التحرير، الدقي، الجيزة",
+                      style: AppTextStyles.regular16GrayBlue,
+                    ),
+                  ],
+                ),
+                Spacer(),
+                FaIcon(
+                  FontAwesomeIcons.comment,
+                  size: height * 0.03,
+                  color: Colors.green,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: height * 0.02),
+          BaseCard(
+            padding: EdgeInsets.all(height * 0.02),
             child: Column(
               children: [
                 BaseCard(
