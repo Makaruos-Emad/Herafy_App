@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:herafy/core/utils/app_constants.dart';
 import 'package:herafy/features/onboarding/ui/widgets/onboarding_screen_body.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -7,13 +6,6 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-          child: OnboardingScreenBody(),
-        ),
-      ),
-    );
+    return const Scaffold(body: SafeArea(child: OnboardingScreenBody()));
   }
 }

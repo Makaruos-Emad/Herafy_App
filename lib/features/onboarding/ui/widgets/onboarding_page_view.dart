@@ -3,8 +3,14 @@ import 'package:herafy/core/utils/app_images.dart';
 import 'package:herafy/features/onboarding/ui/widgets/onboarding_page_view_item.dart';
 
 class OnboardingPageView extends StatelessWidget {
-  const OnboardingPageView({super.key, required this.pageController});
+  const OnboardingPageView({
+    super.key,
+    required this.pageController,
+    required this.onPageChanged,
+  });
+
   final PageController pageController;
+  final ValueChanged<int> onPageChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +18,7 @@ class OnboardingPageView extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: PageView(
         controller: pageController,
+        onPageChanged: onPageChanged,
         children: [
           OnboardingPageViewItem(
             image: Assets.imagesOnboardingImageOne,
@@ -27,9 +34,7 @@ class OnboardingPageView extends StatelessWidget {
           ),
           OnboardingPageViewItem(
             image: Assets.imagesOnboardingImageThree,
-            title:
-                "%"
-                "خدمة مضمونة.. وأمان 100",
+            title: "خدمة مضمونة.. وأمان 100%",
             description:
                 "كل الفنيين عندنا مسجلين ومختبرين فنياً وأمنياً عشان تضمن راحة بالك وأمان بيتك.",
           ),

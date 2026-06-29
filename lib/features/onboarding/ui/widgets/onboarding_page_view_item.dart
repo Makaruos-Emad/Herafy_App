@@ -16,32 +16,51 @@ class OnboardingPageViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SvgPicture.asset(image, fit: BoxFit.contain),
-        Column(
-          children: [
-            Text(
-              title,
-              style: AppTextStyles.bold24DarkBlue,
-              textAlign: TextAlign.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isCompactHeight = constraints.maxHeight < 520;
+        final imageHeight = (constraints.maxHeight * 0.52).clamp(190.0, 360.0);
+        final horizontalTextPadding = constraints.maxWidth < 360 ? 4.0 : 20.0;
+
+        return SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: imageHeight,
+                  width: double.infinity,
+                  child: SvgPicture.asset(image, fit: BoxFit.contain),
+                ),
+                SizedBox(height: isCompactHeight ? 16 : 28),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalTextPadding,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        title,
+                        style: AppTextStyles.bold24DarkBlue,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        description,
+                        style: AppTextStyles.regular16GrayBlue,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                description,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.regular16GrayBlue,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
-      ],
+          ),
+        );
+      },
     );
   }
 }

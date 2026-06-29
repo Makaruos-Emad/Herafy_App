@@ -7,8 +7,8 @@ class Prefs {
     _instance = await SharedPreferences.getInstance();
   }
 
-  static void setBool(String key, bool value) {
-    _instance.setBool(key, value);
+  static Future<bool> setBool(String key, bool value) {
+    return _instance.setBool(key, value);
   }
 
   static bool getBool(String key) {
