@@ -34,124 +34,60 @@ class TaskDetailsbody extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(kHorizontalPadding),
-    return Padding(
-      padding: const EdgeInsets.all(kHorizontalPadding),
-      child: Column(
-        children: [
-          BaseCard(
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: height * 0.04,
-                  backgroundImage: AssetImage(Assets.imagesUserImage),
-                ),
-                SizedBox(width: width * 0.03),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "مكاريوس عماد",
-                      style: AppTextStyles.semiBold20Black,
-                    ),
-                    Text(
-                      "٢٣ شارع التحرير، الدقي، الجيزة",
-                      style: AppTextStyles.regular16GrayBlue,
-                    ),
-                  ],
-                ),
-                Spacer(),
-                FaIcon(
-                  FontAwesomeIcons.comment,
-                  size: height * 0.03,
-                  color: Colors.green,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: height * 0.02),
-          BaseCard(
-            padding: EdgeInsets.all(height * 0.02),
             child: Column(
               children: [
                 BaseCard(
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: height * 0.04,
-                        backgroundImage: NetworkImage(order.imageCliURL),
-                      ),
-                      SizedBox(width: width * 0.03),
-                      Expanded(
+                      SizedBox(height: height * 0.02),
+                      BaseCard(
+                        padding: EdgeInsets.all(height * 0.02),
                         child: Column(
+                          spacing: height * 0.01,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            InfoItem(
+                              icon: order.icon,
+                              title: "نوع الخدمة",
+                              value: order.serviceName,
+                              width: width,
+                            ),
+                            const Divider(),
+                            InfoItem(
+                              icon: Icons.calendar_today,
+                              title: "التاريخ والوقت",
+                              value:
+                                  "${order.scheduledDate.toString().split(' ')[0]}\n${order.scheduledTime}",
+                              width: width,
+                            ),
+                            const Divider(),
                             Text(
-                              order.nameClient,
+                              "وصف العطل",
                               style: AppTextStyles.semiBold20Black,
                             ),
                             Text(
-                              order.placeDetails,
+                              order.problemDetails,
                               style: AppTextStyles.regular16GrayBlue,
+                            ),
+                            SizedBox(height: height * 0.01),
+                            Row(
+                              children: [
+                                Text(
+                                  "سعر المعاينة",
+                                  style: AppTextStyles.semiBold20Black,
+                                ),
+                                const Spacer(),
+                                Text(
+                                  "${order.inspectedPrice} ج.م",
+                                  style: AppTextStyles.semiBold20Black.copyWith(
+                                    color: AppColors.primaryColor,
+                                    fontSize: width * 0.06,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: height * 0.02),
-
-                BaseCard(
-                  padding: EdgeInsets.all(height * 0.02),
-                  child: Column(
-                    spacing: height * 0.01,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InfoItem(
-                        icon: order.icon,
-                        title: "نوع الخدمة",
-                        value: order.serviceName,
-                        width: width,
-                      ),
-
-                      const Divider(),
-
-                      InfoItem(
-                        icon: Icons.calendar_today,
-                        title: "التاريخ والوقت",
-                        value:
-                            "${order.scheduledDate.toString().split(' ')[0]}\n${order.scheduledTime}",
-                        width: width,
-                      ),
-
-                      const Divider(),
-
-                      Text("وصف العطل", style: AppTextStyles.semiBold20Black),
-
-                      Text(
-                        order.problemDetails,
-                        style: AppTextStyles.regular16GrayBlue,
-                      ),
-
-                      SizedBox(height: height * 0.01),
-
-                      Row(
-                        children: [
-                          Text(
-                            "سعر المعاينة",
-                            style: AppTextStyles.semiBold20Black,
-                          ),
-                          const Spacer(),
-                          Text(
-                            "${order.inspectedPrice} ج.م",
-                            style: AppTextStyles.semiBold20Black.copyWith(
-                              color: AppColors.primaryColor,
-                              fontSize: width * 0.06,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
@@ -160,7 +96,6 @@ class TaskDetailsbody extends StatelessWidget {
             ),
           );
         }
-
         return const SizedBox();
       },
     );

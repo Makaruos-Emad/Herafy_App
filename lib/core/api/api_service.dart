@@ -190,6 +190,8 @@ class ApiService {
     );
 
     return OrderDetailsTechnicianModel.fromJson(response.data);
+  }
+
   Future<Response> getTechnicianProfile() async {
     return await dio.get(
       "Technicain/Profile",
