@@ -25,7 +25,11 @@ class LoginNumberScreen extends StatelessWidget {
     final cubit = context.read<AuthCubit>();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) async {
-        if (state is AuthEnterData) {
+        if (state is AuthError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is AuthEnterData) {
           final userTypeId = await _getSelectedUserTypeId(cubit);
           if (!context.mounted) return;
 
@@ -42,9 +46,17 @@ class LoginNumberScreen extends StatelessWidget {
           if (!context.mounted) return;
 
           if (userTypeId == 0) {
-            Navigator.pushNamedAndRemoveUntil(context, Routes.homeTechnicianScreen, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.homeTechnicianScreen,
+              (route) => false,
+            );
           } else {
-            Navigator.pushNamedAndRemoveUntil(context, Routes.homeClientScreen , (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.homeClientScreen,
+              (route) => false,
+            );
           }
         }
       },
@@ -56,7 +68,7 @@ class LoginNumberScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        body: LoginScreenBody(),
+        body: const LoginScreenBody(),
       ),
     );
   }

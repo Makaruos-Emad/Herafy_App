@@ -37,32 +37,35 @@ class CustomListTitleFormField<T> extends FormField<T> {
                     showModalBottomSheet(
                       context: state.context,
                       builder: (_) {
-                        return ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            final item = items[index];
-                            return ListTile(
-                              leading:
-                                  leadingBuilder?.call(item) ?? leading,
-                              title: Text(
-                                titleBuilder(item),
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                              trailing: trailingBuilder?.call(item),
-                              onTap: () {
-                                state.didChange(item); // 🔥 المهم
-                                onSelected(item);
-                                Navigator.pop(context);
-                              },
-                            );
-                          },
+                        return SafeArea(
+                          child: ListView.builder(
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              final item = items[index];
+                              return ListTile(
+                                leading: leadingBuilder?.call(item) ?? leading,
+                                title: Text(
+                                  titleBuilder(item),
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                trailing: trailingBuilder?.call(item),
+                                onTap: () {
+                                  state.didChange(item);
+                                  onSelected(item);
+                                  Navigator.pop(context);
+                                },
+                              );
+                            },
+                          ),
                         );
                       },
                     );
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 14),
+                      horizontal: 12,
+                      vertical: 14,
+                    ),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: state.hasError
@@ -84,15 +87,18 @@ class CustomListTitleFormField<T> extends FormField<T> {
                             children.add(const SizedBox(width: 6));
                           }
                           children.add(
-                            Text(
-                              selected == null
-                                  ? (placeholderText ?? "")
-                                  : titleBuilder(selected),
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: selected == null
-                                    ? Theme.of(state.context).hintColor
-                                    : null,
+                            Expanded(
+                              child: Text(
+                                selected == null
+                                    ? (placeholderText ?? "")
+                                    : titleBuilder(selected),
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: selected == null
+                                      ? Theme.of(state.context).hintColor
+                                      : null,
+                                ),
                               ),
                             ),
                           );
@@ -116,8 +122,7 @@ class CustomListTitleFormField<T> extends FormField<T> {
                     padding: const EdgeInsets.only(top: 5, right: 5),
                     child: Text(
                       state.errorText!,
-                      style: const TextStyle(
-                          color: Colors.red, fontSize: 12),
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
                     ),
                   ),
               ],

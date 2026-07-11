@@ -10,7 +10,6 @@ class ApiClient {
 
   Future<Options> authorizedOptions({Map<String, dynamic>? headers}) async {
     final token = await getAuthToken();
-    print(token);
     return Options(
       headers: {
         if (token != null) "Authorization": "Bearer $token",

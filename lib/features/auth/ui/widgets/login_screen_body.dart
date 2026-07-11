@@ -13,19 +13,41 @@ class LoginScreenBody extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-          child: Form(
-            child: Column(
-              children: [
-                SvgPicture.asset(Assets.imagesLoginMobileNumber),
-                WidgetEnterNumber(),
-              ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final horizontalPadding = constraints.maxWidth < 360
+              ? 12.0
+              : kHorizontalPadding;
+          final imageHeight = (constraints.maxHeight * 0.42).clamp(
+            190.0,
+            360.0,
+          );
+
+          return SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: imageHeight,
+                      width: double.infinity,
+                      child: SvgPicture.asset(
+                        Assets.imagesLoginMobileNumber,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    SizedBox(height: constraints.maxHeight < 650 ? 24 : 40),
+                    const WidgetEnterNumber(),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

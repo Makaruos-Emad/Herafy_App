@@ -24,7 +24,6 @@ class ChangeStatusOrderCubit extends Cubit<ChangeStatusOrderState> {
       emit(ChangeStatusOrderSuccess());
     } catch (e) {
       emit(ChangeStatusOrderError(e.toString()));
-      print("Error changing order status: $e");
     }
   }
 }

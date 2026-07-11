@@ -14,8 +14,7 @@ class BodyEnterCodeScreen extends StatefulWidget {
 }
 
 class _BodyEnterCodeScreenState extends State<BodyEnterCodeScreen> {
-  GlobalKey<FormState> fromKey = GlobalKey();
-  String? otp;
+  final GlobalKey<FormState> fromKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -24,62 +23,78 @@ class _BodyEnterCodeScreenState extends State<BodyEnterCodeScreen> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: kHorizontalPadding,
-          vertical: 16,
-        ),
-        child: Form(
-          key: fromKey,
-          child: Column(
-            textDirection: TextDirection.ltr,
-            children: [
-              Center(
-                child: Text(
-                  "تم ارسال كود التحقق الى الرقم   \n"
-                  "${cubit.phone}",
-                  style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(height: 60),
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: CustomPinPut(
-                  onCompleted: (value) {
-                    otp = value;
-                  },
-                ),
-              ),
-              SizedBox(height: 10),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final horizontalPadding = constraints.maxWidth < 360
+              ? 12.0
+              : kHorizontalPadding;
 
-              Row(
-                children: [
-                  Text("لم يصلك الكود؟"),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "إعادة الإرسال",
-                      style: TextStyle(color: AppColors.primaryColor),
-                    ),
+          return SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding,
+                  vertical: 16,
+                ),
+                child: Form(
+                  key: fromKey,
+                  child: Column(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          "تم ارسال كود التحقق الى الرقم\n${cubit.phone ?? ""}",
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(height: constraints.maxHeight < 650 ? 32 : 60),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: const CustomPinPut(),
+                      ),
+                      const SizedBox(height: 10),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Flexible(child: Text("لم يصلك الكود؟")),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "إعادة الإرسال",
+                              style: TextStyle(color: AppColors.primaryColor),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: constraints.maxHeight < 650 ? 24 : 40),
+
+                      CustomButton(
+                        onPressed: () {
+                          if (!fromKey.currentState!.validate()) return;
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "التحقق بالكود غير متصل بالخادم حالياً",
+                              ),
+                            ),
+                          );
+                        },
+                        text: 'تأكيد',
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-
-              SizedBox(height: 40),
-
-              CustomButton(
-                onPressed: () {
-                  if (fromKey.currentState!.validate()) {
-                    print("success");
-                    // context.read<AuthCubit>().submitOtp(otp!);
-                  }
-                },
-                text: 'تأكيد',
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

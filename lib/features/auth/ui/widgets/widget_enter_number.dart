@@ -4,12 +4,30 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 import 'package:herafy/core/widgets/custom_text_form_field.dart';
 import 'package:herafy/features/auth/cubit/auth_cubit/auth_cubit.dart';
+import 'package:herafy/features/auth/cubit/auth_cubit/auth_state.dart';
 
-class WidgetEnterNumber extends StatelessWidget {
+class WidgetEnterNumber extends StatefulWidget {
   const WidgetEnterNumber({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  static String _phoneNumber = "";
+  @override
+  State<WidgetEnterNumber> createState() => _WidgetEnterNumberState();
+}
+
+class _WidgetEnterNumberState extends State<WidgetEnterNumber> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  void _submitPhone() {
+    if (!_formKey.currentState!.validate()) return;
+
+    context.read<AuthCubit>().submitPhone(_phoneController.text.trim());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,36 +35,35 @@ class WidgetEnterNumber extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextFormField(
-                  hintText: "ادخل رقم الهاتف",
-                  hintStyle: AppTextStyles.semiBold20Black,
-                  textInputType: TextInputType.number,
-                  textDirection: TextDirection.ltr,
-                  validator: phoneValidator,
-                  suffixText: " 20+",
-                  //\u200E دة رمز بيستخدم لتثبيت اتجاه النص من الشمال لليمين داخل سياق عربي
-                  onSaved: (phoneNumber) {
-                    _phoneNumber = phoneNumber ?? "";
-                  },
-                ),
-              ),
-
-              const SizedBox(width: 8),
-            ],
+          CustomTextFormField(
+            hintText: "ادخل رقم الهاتف",
+            hintStyle: AppTextStyles.semiBold20Black,
+            textInputType: TextInputType.phone,
+            textDirection: TextDirection.ltr,
+            validator: phoneValidator,
+            suffixText: " 20+",
+            controller: _phoneController,
           ),
-          SizedBox(height: 50),
-          CustomButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!
-                    .save(); //دي مهمة ف حتة لما ادوس  ارسال الكود بيروح واخد القيمة اللي انا كتبهتا
-                context.read<AuthCubit>().submitPhone(_phoneNumber);
-              }
+          const SizedBox(height: 32),
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              final isLoading = state is AuthLoading;
+
+              return CustomButton(
+                onPressed: isLoading ? null : _submitPhone,
+                text: 'متابعة',
+                child: isLoading
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : null,
+              );
             },
-            text: 'أرسال الكود',
           ),
         ],
       ),

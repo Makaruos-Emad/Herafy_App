@@ -21,30 +21,40 @@ class UserTypeSelectItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: 170,
-        height: 195,
-        decoration: BoxDecoration(
-          color: selected
-              ? AppColors.primaryColor.withValues(alpha: 0.12)
-              : AppColors.lightGray.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: selected ? AppColors.primaryColor : AppColors.lightGray,
-            width: 2,
-          ),
-        ),
-        child: Column(
-          children: [
-            Image.asset(image, height: 115, width: 115),
-            Text(title, style: AppTextStyles.semiBold20Black),
-            Text(
-              description,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.regular16GrayBlue,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final imageSize = constraints.maxWidth < 170 ? 92.0 : 112.0;
+
+          return Container(
+            width: double.infinity,
+            constraints: const BoxConstraints(minHeight: 190),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: selected
+                  ? AppColors.primaryColor.withValues(alpha: 0.12)
+                  : AppColors.lightGray.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: selected ? AppColors.primaryColor : AppColors.lightGray,
+                width: 2,
+              ),
             ),
-          ],
-        ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(image, height: imageSize, width: imageSize),
+                const SizedBox(height: 8),
+                Text(title, style: AppTextStyles.semiBold20Black),
+                const SizedBox(height: 6),
+                Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.regular16GrayBlue,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

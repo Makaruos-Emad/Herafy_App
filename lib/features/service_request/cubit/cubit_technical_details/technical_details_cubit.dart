@@ -49,7 +49,8 @@ class TechnicalDetailsCubit extends Cubit<TechnicalDetailsState> {
     required double inspectedPrice,
   }) async {
     try {
-      final formattedTime = "${scheduledTime.hour.toString().padLeft(2, '0')}:"
+      final formattedTime =
+          "${scheduledTime.hour.toString().padLeft(2, '0')}:"
           "${scheduledTime.minute.toString().padLeft(2, '0')}:00";
 
       final response = await apiService.createOrder(

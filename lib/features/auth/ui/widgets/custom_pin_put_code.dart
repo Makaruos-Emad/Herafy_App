@@ -9,17 +9,21 @@ class CustomPinPut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    final pinWidth = ((width - 32 - 5 * 8) / 6).clamp(42.0, 58.0);
+    final pinHeight = pinWidth.clamp(48.0, 60.0);
+
     return Pinput(
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.length < 6) {
           return 'الرجاء ادخال كود التحقق';
         }
         return null;
       },
       showCursor: false,
       defaultPinTheme: PinTheme(
-        width: 80,
-        height: 60,
+        width: pinWidth,
+        height: pinHeight,
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
           border: Border.all(color: AppColors.primaryColor),
@@ -28,8 +32,8 @@ class CustomPinPut extends StatelessWidget {
         textStyle: const TextStyle(color: Colors.black, fontSize: 20),
       ),
       focusedPinTheme: PinTheme(
-        width: 80,
-        height: 60,
+        width: pinWidth,
+        height: pinHeight,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.primaryColor),
           color: AppColors.primaryColor,
@@ -40,7 +44,7 @@ class CustomPinPut extends StatelessWidget {
       length: 6,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.phone,
-      separatorBuilder: (index) => const SizedBox(width: 20),
+      separatorBuilder: (index) => const SizedBox(width: 8),
       onCompleted: onCompleted,
     );
   }
