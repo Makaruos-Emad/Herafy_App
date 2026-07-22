@@ -4,8 +4,11 @@ import 'package:herafy/core/theme/app_text_styles.dart';
 import 'package:herafy/core/widgets/custom_button.dart';
 
 class ActiveJobCard extends StatelessWidget {
-  const ActiveJobCard({super.key});
-
+  const ActiveJobCard({super.key, required this.nameClient, required this.time, required this.address, required this.workType});
+  final String nameClient;
+  final String time;
+  final String address;
+  final String workType;
   @override
   Widget build(BuildContext context) {
     return Padding(

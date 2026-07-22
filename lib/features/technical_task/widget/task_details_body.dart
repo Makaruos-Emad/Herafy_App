@@ -40,53 +40,55 @@ class TaskDetailsbody extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(height: height * 0.02),
-                      BaseCard(
-                        padding: EdgeInsets.all(height * 0.02),
-                        child: Column(
-                          spacing: height * 0.01,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InfoItem(
-                              icon: order.icon,
-                              title: "نوع الخدمة",
-                              value: order.serviceName,
-                              width: width,
-                            ),
-                            const Divider(),
-                            InfoItem(
-                              icon: Icons.calendar_today,
-                              title: "التاريخ والوقت",
-                              value:
-                                  "${order.scheduledDate.toString().split(' ')[0]}\n${order.scheduledTime}",
-                              width: width,
-                            ),
-                            const Divider(),
-                            Text(
-                              "وصف العطل",
-                              style: AppTextStyles.semiBold20Black,
-                            ),
-                            Text(
-                              order.problemDetails,
-                              style: AppTextStyles.regular16GrayBlue,
-                            ),
-                            SizedBox(height: height * 0.01),
-                            Row(
-                              children: [
-                                Text(
-                                  "سعر المعاينة",
-                                  style: AppTextStyles.semiBold20Black,
-                                ),
-                                const Spacer(),
-                                Text(
-                                  "${order.inspectedPrice} ج.م",
-                                  style: AppTextStyles.semiBold20Black.copyWith(
-                                    color: AppColors.primaryColor,
-                                    fontSize: width * 0.06,
+                      Expanded(
+                        child: BaseCard(
+                          padding: EdgeInsets.all(height * 0.02),
+                          child: Column(
+                            spacing: height * 0.01,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InfoItem(
+                                icon: order.icon,
+                                title: "نوع الخدمة",
+                                value: order.serviceName,
+                                width: width,
+                              ),
+                              const Divider(),
+                              InfoItem(
+                                icon: Icons.calendar_today,
+                                title: "التاريخ والوقت",
+                                value:
+                                    "${order.scheduledDate.toString().split(' ')[0]}\n${order.scheduledTime}",
+                                width: width,
+                              ),
+                              const Divider(),
+                              Text(
+                                "وصف العطل",
+                                style: AppTextStyles.semiBold20Black,
+                              ),
+                              Text(
+                                order.problemDetails,
+                                style: AppTextStyles.regular16GrayBlue,
+                              ),
+                              SizedBox(height: height * 0.01),
+                              Row(
+                                children: [
+                                  Text(
+                                    "سعر المعاينة",
+                                    style: AppTextStyles.semiBold20Black,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  const Spacer(),
+                                  Text(
+                                    "${order.inspectedPrice} ج.م",
+                                    style: AppTextStyles.semiBold20Black.copyWith(
+                                      color: AppColors.primaryColor,
+                                      fontSize: width * 0.06,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

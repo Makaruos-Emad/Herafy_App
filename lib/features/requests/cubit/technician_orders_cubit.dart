@@ -6,7 +6,7 @@ import 'package:herafy/features/requests/model/technician_order_model.dart';
 class TechnicianOrdersCubit extends Cubit<TechnicianOrdersState> {
   TechnicianOrdersCubit() : super(TechnicianOrdersInitial());
 
-  final api = ApiService();
+  final api = ProfileApiService();
 
   Future<void> getTechnicianOrders() async {
     emit(TechnicianOrdersLoading());
@@ -18,9 +18,6 @@ class TechnicianOrdersCubit extends Cubit<TechnicianOrdersState> {
 
       for (int state = 0; state <= 5; state++) {
         final orders = await api.getTechnicianOrders(
-          token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImVmMGExMjU2LTM4OTctNGY5Ni1iOWNjLTFkODk4ODk2NWVlMSIsIlRva2VuSWQiOiJkZDc0NjE0OS01YzFmLTQxNTgtYTRjNS1mYzZhYTc0OGFlZTUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6IisyMDEwMjQ4NDk2OTkiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJUZWNobmljaWFuIiwiZXhwIjoxNzgzMzE3MTc0LCJpc3MiOiJodHRwczovL2hlcmFmeS5ydW5hc3AubmV0LyIsImF1ZCI6Imh0dHBzOi8vaGVyYWZ5LnJ1bmFzcC5uZXQvIn0.WlMr98kNdVMbxNDvY9_BRvE61T93dZ0j2QdFNR1wGyQ",
-          techId: "ef0a1256-3897-4f96-b9cc-1d8988965ee1",
           state: state,
         );
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herafy/features/profile/cubit/profile_tech_state.dart';
 import 'package:herafy/features/profile/data/profile_api_service.dart';
+import 'package:herafy/features/profile/helper/save_id_technician_in_storge.dart';
 
 class ProfileTechCubit extends Cubit<ProfileTechState> {
   ProfileTechCubit() : super(ProfileTechInitial());
@@ -15,6 +16,8 @@ class ProfileTechCubit extends Cubit<ProfileTechState> {
     try {
       final response = await api.getTechnicianProfile();
 
+      saveIdTechnician(response.data['userId']);
+      
       emit(ProfileTechSuccess(response.data));
     } catch (e) {
       emit(ProfileTechError(e.toString()));

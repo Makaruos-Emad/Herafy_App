@@ -13,7 +13,7 @@ class ListActiveJobCard extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16),
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const ActiveJobCard();
+          return const ActiveJobCard(nameClient: 'محمد', workType: 'سباكة',address: 'القاهرة',time: '10:30 ص');
         },
       ),
     );

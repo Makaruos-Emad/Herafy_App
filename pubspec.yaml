@@ -60,6 +60,7 @@ dependencies:
   equatable: ^2.0.8
   path_provider: ^2.1.5
   cached_network_image: ^3.4.1
+  flutter_launcher_icons: ^0.14.4
   
 
 dev_dependencies:
@@ -121,3 +122,9 @@ flutter_assets:
   field_prefix: null
 flutter_intl:
   enabled: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/herafy_icon.png"
+  remove_alpha_ios: true

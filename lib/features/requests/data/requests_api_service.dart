@@ -41,4 +41,17 @@ class RequestsApiService extends ApiClient {
       options: await authorizedOptions(),
     );
   }
+
+  Future<void> changeStatusOrder({
+    required int orderId,
+    required int status,
+  }) async {
+    await dio.patch(
+      "Order/ChangeStatusOrder",
+      queryParameters: {"orderId": orderId},
+      data: status,
+      options: await authorizedOptions(headers: {"Content-Type": "application/json"}),
+    );
+  }
 }
+

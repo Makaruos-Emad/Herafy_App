@@ -46,6 +46,10 @@ class Assets {
   /// assets/images/empty_notifications.svg
   static const String imagesEmptyNotifications = "assets/images/empty_notifications.svg";
 
+  /// Assets for imagesHerafyIcon
+  /// assets/images/herafy_icon.JPG
+  static const String imagesHerafyIcon = "assets/images/herafy_icon.png";
+
   /// Assets for imagesLoginMobileNumber
   /// assets/images/loginMobileNumber.svg
   static const String imagesLoginMobileNumber = "assets/images/loginMobileNumber.svg";

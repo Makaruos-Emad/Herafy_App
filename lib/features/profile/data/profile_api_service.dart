@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:herafy/core/api/api_client.dart';
+import 'package:herafy/features/profile/helper/save_id_technician_in_storge.dart';
+import 'package:herafy/features/requests/model/technician_order_model.dart';
 
 class ProfileApiService extends ApiClient {
   Future<Response> getClientProfile() async {
-    return await dio.get(
-      "Client/Profile",
-      options: await authorizedOptions(),
-    );
+    return await dio.get("Client/Profile", options: await authorizedOptions());
   }
 
   Future<Response> updateProfile({
@@ -28,9 +27,7 @@ class ProfileApiService extends ApiClient {
       "Client/Update",
       data: formData,
       options: await authorizedOptions(
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: {"Content-Type": "multipart/form-data"},
       ),
     );
   }
@@ -40,6 +37,21 @@ class ProfileApiService extends ApiClient {
       "Technicain/Profile",
       options: await authorizedOptions(),
     );
+  }
+
+  Future<List<TechnicianOrderModel>> getTechnicianOrders({
+    required int state,
+  }) async {
+    final String? idTechnician = await getIdTechnician();
+    final response = await dio.get(
+      "Order/GetTechnicianOrders",
+      queryParameters: {"techId": idTechnician, "state": state},
+      options: await authorizedOptions(),
+    );
+
+    return (response.data as List)
+        .map((e) => TechnicianOrderModel.fromJson(e))
+        .toList();
   }
 
   Future<Response> updateTechnicalProfile({
@@ -65,9 +77,7 @@ class ProfileApiService extends ApiClient {
       "Technicain/Update",
       data: formData,
       options: await authorizedOptions(
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: {"Content-Type": "multipart/form-data"},
       ),
     );
   }
